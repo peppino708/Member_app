@@ -17,10 +17,11 @@ export const useAuth = () => {
       setLoading(true);
 
       axios
-        .get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .get(`http://localhost:3000/api/v1/members/${id}`)
         .then((res) => {
           if (res.data) {
-            const isAdmin = res.data.id === 10 ? true : false;
+            const { user } = res.data;
+            const isAdmin = user.id === 1 ? true : false;
             setLoginUser({ ...res.data, isAdmin });
             showMessage({ title: "ログインしました", status: "success" });
             history.push("/home");

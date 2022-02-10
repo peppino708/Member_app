@@ -30,6 +30,7 @@ export const UserManagement: VFC = memo(() => {
     [users, onSelectUser, onOpen] //使っていく変数は基本的に全部依存配列に設定していく
   );
 
+  console.log(users);
   return (
     <>
       {loading ? (
