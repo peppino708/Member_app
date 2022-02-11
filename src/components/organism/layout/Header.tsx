@@ -35,7 +35,7 @@ export const Header: VFC = memo(() => {
           onClick={onClickHome}
         >
           <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
-            ユーザー管理アプリ
+            Member App
           </Heading>
         </Flex>
         <Flex
@@ -45,7 +45,7 @@ export const Header: VFC = memo(() => {
           display={{ base: "none", md: "flex" }}
         >
           <Box pr={4} _hover={{ textDecoration: "underline" }}>
-            <Link to="/home/user_management">ユーザー管理</Link>
+            <Link to="/home/user_management">メンバー</Link>
           </Box>
           <Box pr={4} _hover={{ textDecoration: "underline" }}>
             <Link to="/home/setting">設定</Link>
