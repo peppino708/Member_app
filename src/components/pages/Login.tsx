@@ -23,7 +23,7 @@ export const Login: VFC = memo(() => {
     <Flex align="center" justify="center" height="100vh" shadow="md">
       <Box bg="white" w="sm" p={4} borderRadius="md">
         <Heading as="h1" size="lg" textAlign="center">
-          メンバーアプリ
+          Member App
         </Heading>
         <Divider my={4} />
         {/* stackは囲った中の要素を等間隔に配置していく */}
