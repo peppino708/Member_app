@@ -57,7 +57,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
     >
       <ModalOverlay />
       <ModalContent pb={2}>
-        <ModalHeader>ユーザー詳細</ModalHeader>
+        <ModalHeader>Member Profile</ModalHeader>
         <ModalCloseButton />
         <ModalBody mx={4}>
           <Stack spacing={4}>
@@ -70,7 +70,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>フルネーム</FormLabel>
+              <FormLabel>ニックネーム</FormLabel>
               <Input
                 value={name}
                 onChange={onChangeName}
@@ -78,7 +78,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>MAIL</FormLabel>
+              <FormLabel>趣味</FormLabel>
               <Input
                 value={email}
                 onChange={onChangeEmail}
@@ -86,7 +86,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>TEL</FormLabel>
+              <FormLabel>最近の1枚</FormLabel>
               <Input
                 value={phone}
                 onChange={onChangePhone}
