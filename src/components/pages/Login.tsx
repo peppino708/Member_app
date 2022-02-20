@@ -1,5 +1,6 @@
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
@@ -11,6 +12,10 @@ export const Login: VFC = memo(() => {
     setUserId(e.target.value);
 
   const onClickLogin = () => login(userId);
+
+  const history = useHistory();
+
+  const onClickRegister = () => history.push("/register");
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -41,6 +46,8 @@ export const Login: VFC = memo(() => {
           >
             ログイン
           </PrimaryButton>
+          <Divider my={4} />
+          <PrimaryButton onClick={onClickRegister}>新規登録</PrimaryButton>
         </Stack>
       </Box>
     </Flex>
