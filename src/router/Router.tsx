@@ -5,6 +5,7 @@ import { homeRoutes } from "./HomeRoutes";
 import { Page404 } from "../Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
+import { Register } from "../components/pages/Register";
 
 export const Router: VFC = memo(() => {
   return (
@@ -12,6 +13,9 @@ export const Router: VFC = memo(() => {
       <LoginUserProvider>
         <Route exact path="/">
           <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
         <Route
           path="/home"
