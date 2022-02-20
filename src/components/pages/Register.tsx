@@ -1,4 +1,5 @@
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
+import axios from "axios";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 // import { useAuth } from "../../hooks/useAuth";
@@ -11,19 +12,21 @@ export const Register: VFC = memo(() => {
   const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) =>
     setUserName(e.target.value);
 
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickname] = useState("");
   const onChangeNickName = (e: ChangeEvent<HTMLInputElement>) =>
-    setNickName(e.target.value);
+    setNickname(e.target.value);
 
   const [hobbies, setHobbies] = useState("");
   const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
     setHobbies(e.target.value);
 
-  const [recentPicture, setRecentPicture] = useState("");
+  const [recentImage, setRecentImage] = useState("");
   const onChangeRecentPicture = (e: ChangeEvent<HTMLInputElement>) =>
-    setRecentPicture(e.target.value);
+    setRecentImage(e.target.value);
 
-  const onClickRegister = () => {};
+  const onClickRegister = () => {
+    axios.post("http://localhost:3000/api/v1/members");
+  };
 
   const history = useHistory();
 
@@ -53,7 +56,7 @@ export const Register: VFC = memo(() => {
           />
           <Input
             placeholder="ニックネーム"
-            value={nickName}
+            value={nickname}
             onChange={onChangeNickName}
             onKeyPress={onKeyPress}
           />
@@ -65,7 +68,7 @@ export const Register: VFC = memo(() => {
           />
           <Input
             placeholder="最近の一枚"
-            value={recentPicture}
+            value={recentImage}
             onChange={onChangeRecentPicture}
             onKeyPress={onKeyPress}
           />

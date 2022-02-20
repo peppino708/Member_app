@@ -25,26 +25,26 @@ type Props = {
 export const UserDetailModal: VFC<Props> = memo((props) => {
   const { user, isOpen, isAdmin = false, onClose } = props;
 
-  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [hobbies, setHobbies] = useState("");
+  const [recentImage, setRecentImage] = useState("");
 
   useEffect(() => {
-    setUsername(user?.username ?? "");
+    setNickname(user?.nick_name ?? "");
     setName(user?.name ?? "");
-    setEmail(user?.email ?? "");
-    setPhone(user?.phone ?? "");
+    setHobbies(user?.hobbies ?? "");
+    setRecentImage(user?.recent_image ?? "");
   }, [user]);
 
-  const onChangeUsername = (e: ChangeEvent<HTMLInputElement>) =>
-    setUsername(e.target.value);
+  const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
+    setNickname(e.target.value);
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) =>
     setName(e.target.value);
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const onChangePhone = (e: ChangeEvent<HTMLInputElement>) =>
-    setPhone(e.target.value);
+  const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
+    setHobbies(e.target.value);
+  const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
+    setRecentImage(e.target.value);
 
   const onClickUpdate = () => alert();
   return (
@@ -63,15 +63,15 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>名前</FormLabel>
               <Input
-                value={username}
-                onChange={onChangeUsername}
+                value={name}
+                onChange={onChangeNickname}
                 isReadOnly={!isAdmin}
               />
             </FormControl>
             <FormControl>
               <FormLabel>ニックネーム</FormLabel>
               <Input
-                value={name}
+                value={nickname}
                 onChange={onChangeName}
                 isReadOnly={!isAdmin}
               />
@@ -79,16 +79,16 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>趣味</FormLabel>
               <Input
-                value={email}
-                onChange={onChangeEmail}
+                value={hobbies}
+                onChange={onChangeHobbies}
                 isReadOnly={!isAdmin}
               />
             </FormControl>
             <FormControl>
               <FormLabel>最近の1枚</FormLabel>
               <Input
-                value={phone}
-                onChange={onChangePhone}
+                value={recentImage}
+                onChange={onChangeRecentImage}
                 isReadOnly={!isAdmin}
               />
             </FormControl>

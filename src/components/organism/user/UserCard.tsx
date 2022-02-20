@@ -4,13 +4,13 @@ import { memo, VFC } from "react";
 type Props = {
   id: number;
   imageUrl: string;
-  userName: string;
+  nickname: string;
   fullName: string;
   onClick: (id: number) => void;
 };
 
 export const UserCard: VFC<Props> = memo((props) => {
-  const { imageUrl, userName, fullName, onClick, id } = props;
+  const { imageUrl, nickname, fullName, onClick, id } = props;
   return (
     <Box
       w="260px"
@@ -27,11 +27,11 @@ export const UserCard: VFC<Props> = memo((props) => {
           borderRadius="full"
           boxSize="160px"
           src={imageUrl}
-          alt={userName}
+          alt={nickname}
           m="auto"
         />
         <Text fontSize="lg" fontWeight="bold">
-          {userName}
+          {nickname}
         </Text>
         <Text fontSize="sm" color="gray">
           {fullName}
