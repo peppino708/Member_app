@@ -12,11 +12,8 @@ export const useAllUsers = () => {
   const getUsers = useCallback(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/api/v1/members")
-      .then((res) => {
-        const { users } = res.data;
-        setUsers(users);
-      })
+      .get<Array<User>>("http://localhost:3000/api/v1/members")
+      .then((res) => setUsers(res.data))
       .catch(() => {
         showMessage({ title: "ユーザー取得に失敗しました", status: "error" });
       })

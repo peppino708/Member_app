@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { User } from "../types/api/user";
 // import { User } from "../types/api/user";
 import { useLoginUser } from "./useLoginUser";
 import { useMessage } from "./useMessage";
@@ -17,11 +18,11 @@ export const useAuth = () => {
       setLoading(true);
 
       axios
-        .get(`http://localhost:3000/api/v1/members/${id}`)
+        .get<User>(`http://localhost:3000/api/v1/members/${id}`)
         .then((res) => {
           if (res.data) {
-            const { user } = res.data;
-            const isAdmin = user.id === 1 ? true : false;
+            //isAdminフラグ機能していない...
+            const isAdmin = res.data.id === 1 ? true : false;
             setLoginUser({ ...res.data, isAdmin });
             showMessage({ title: "ログインしました", status: "success" });
             history.push("/home");
