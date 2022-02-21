@@ -73,7 +73,12 @@ export const Register: VFC = memo(() => {
             onKeyPress={onKeyPress}
           />
           <PrimaryButton
-            disabled={hobbies === ""}
+            disabled={
+              hobbies === "" ||
+              userName === "" ||
+              nickname === "" ||
+              recentImage === ""
+            }
             // loading={loading}
             onClick={onClickRegister}
           >
