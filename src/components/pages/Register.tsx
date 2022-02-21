@@ -1,12 +1,12 @@
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
-import axios from "axios";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
+import { useRegister } from "../../hooks/useRegister";
 // import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 export const Register: VFC = memo(() => {
-  // const { login, loading } = useAuth();
+  const { register, loading } = useRegister();
 
   const [userName, setUserName] = useState("");
   const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) =>
@@ -24,9 +24,7 @@ export const Register: VFC = memo(() => {
   const onChangeRecentPicture = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
-  const onClickRegister = () => {
-    axios.post("http://localhost:3000/api/v1/members");
-  };
+  const onClickRegister = () => register();
 
   const history = useHistory();
 
@@ -79,7 +77,7 @@ export const Register: VFC = memo(() => {
               nickname === "" ||
               recentImage === ""
             }
-            // loading={loading}
+            loading={loading}
             onClick={onClickRegister}
           >
             新規登録
