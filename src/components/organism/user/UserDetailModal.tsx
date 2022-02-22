@@ -12,6 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import { useHistory } from "react-router-dom";
 import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
@@ -24,6 +25,7 @@ type Props = {
 
 export const UserDetailModal: VFC<Props> = memo((props) => {
   const { user, isOpen, isAdmin = false, onClose } = props;
+  const history = useHistory();
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -46,7 +48,8 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
-  const onClickUpdate = () => alert();
+  const onClickUpdate = () => history.push("/home/edit");
+
   return (
     <Modal
       isOpen={isOpen}
@@ -94,11 +97,12 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
             </FormControl>
           </Stack>
         </ModalBody>
-        {isAdmin && (
-          <ModalFooter>
-            <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
-          </ModalFooter>
-        )}
+        {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
+        {/* {isAdmin && ( */}
+        <ModalFooter>
+          <PrimaryButton onClick={onClickUpdate}>編集</PrimaryButton>
+        </ModalFooter>
+        {/* )} */}
       </ModalContent>
     </Modal>
   );
