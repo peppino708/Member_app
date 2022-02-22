@@ -3,8 +3,10 @@ import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { User } from "../types/api/user";
+import { useMessage } from "./useMessage";
 
 export const useRegister = () => {
+  const { showMessage } = useMessage();
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
@@ -29,10 +31,12 @@ export const useRegister = () => {
           console.log(res.data);
           history.push("/home");
         })
-        .catch(() => alert("新規登録できません"))
+        .catch(() =>
+          showMessage({ title: "新規登録できません", status: "error" })
+        )
         .finally(() => setLoading(false));
     },
-    [history]
+    [history, showMessage]
   );
   return { register, loading };
 };

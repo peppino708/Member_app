@@ -1,12 +1,14 @@
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
+import { useMessage } from "../../hooks/useMessage";
 import { useRegister } from "../../hooks/useRegister";
 // import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 export const Register: VFC = memo(() => {
   const { register, loading } = useRegister();
+  const { showMessage } = useMessage();
 
   const [userName, setUserName] = useState("");
   const onChangeUserName = (e: ChangeEvent<HTMLInputElement>) =>
@@ -39,7 +41,10 @@ export const Register: VFC = memo(() => {
         nickname === "" ||
         recentImage === ""
       ) {
-        alert("入力されていない項目があります。");
+        showMessage({
+          title: "入力されていない項目があります",
+          status: "error",
+        });
       } else {
         e.preventDefault();
         onClickRegister();
