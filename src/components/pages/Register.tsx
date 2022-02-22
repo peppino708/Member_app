@@ -32,8 +32,17 @@ export const Register: VFC = memo(() => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault();
-      onClickRegister();
+      if (
+        hobbies === "" ||
+        userName === "" ||
+        nickname === "" ||
+        recentImage === ""
+      ) {
+        alert("入力されていない項目があります。");
+      } else {
+        e.preventDefault();
+        onClickRegister();
+      }
     }
   };
 
