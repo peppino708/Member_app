@@ -3,7 +3,6 @@ import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 import { useRegister } from "../../hooks/useRegister";
-// import { useAuth } from "../../hooks/useAuth";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 export const Register: VFC = memo(() => {
