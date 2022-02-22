@@ -1,3 +1,4 @@
+import { Edit } from "../components/pages/Edit";
 import { Home } from "../components/pages/Home";
 import { Setting } from "../components/pages/Setting";
 import { UserManagement } from "../components/pages/UserManagement";
@@ -18,6 +19,11 @@ export const homeRoutes = [
     path: "/setting",
     exact: false,
     children: <Setting />,
+  },
+  {
+    path: "/edit",
+    exact: false,
+    children: <Edit />,
   },
   {
     path: "*",
