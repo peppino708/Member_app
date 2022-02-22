@@ -29,7 +29,8 @@ export const useRegister = () => {
         })
         .then((res) => {
           console.log(res.data);
-          history.push("/home");
+          showMessage({ title: "新規登録しました", status: "success" });
+          history.push("/home/user_management");
         })
         .catch(() =>
           showMessage({ title: "新規登録できません", status: "error" })
