@@ -91,7 +91,9 @@ export const Edit: VFC<Props> = memo((props) => {
               />
             </FormControl>
             <Divider my={4} />
-            <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
+            <PrimaryButton onClick={onClickUpdate} loading={loading}>
+              更新
+            </PrimaryButton>
             <Divider my={4} />
             <Button
               bg="red.400"
