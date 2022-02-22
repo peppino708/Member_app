@@ -24,7 +24,8 @@ export const Register: VFC = memo(() => {
   const onChangeRecentPicture = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
-  const onClickRegister = () => register();
+  const onClickRegister = () =>
+    register(userName, nickname, hobbies, recentImage);
 
   const history = useHistory();
 
