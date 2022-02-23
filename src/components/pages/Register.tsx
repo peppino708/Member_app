@@ -65,12 +65,14 @@ export const Register: VFC = memo(() => {
             value={userName}
             onChange={onChangeUserName}
             onKeyPress={onKeyPress}
+            maxLength={10}
           />
           <Input
             placeholder="ニックネーム"
             value={nickname}
             onChange={onChangeNickName}
             onKeyPress={onKeyPress}
+            maxLength={10}
           />
           <Input
             placeholder="趣味"
