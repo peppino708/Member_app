@@ -21,6 +21,7 @@ export const Edit: VFC<Props> = memo((props) => {
   // const {} = props;
   const history = useHistory();
   const { update, loading } = useUpadate();
+  //未完
   const { loginUser } = useLoginUser();
   console.log(loginUser?.name);
 
@@ -29,6 +30,7 @@ export const Edit: VFC<Props> = memo((props) => {
   const [hobbies, setHobbies] = useState("");
   const [recentImage, setRecentImage] = useState("");
 
+  //未完
   useEffect(() => {
     setNickname(loginUser?.nick_name ?? "");
     setName(loginUser?.name ?? "");
