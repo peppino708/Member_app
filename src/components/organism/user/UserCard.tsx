@@ -21,6 +21,7 @@ export const UserCard: VFC<Props> = memo((props) => {
       p={4}
       _hover={{ opacity: 0.8, cursor: "pointer" }}
       onClick={() => onClick(id)}
+      overflow={"auto"}
     >
       <Stack textAlign="center">
         <Image
