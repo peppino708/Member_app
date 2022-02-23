@@ -5,3 +5,16 @@ export type User = {
   hobbies: string;
   recent_image: string;
 };
+
+// サインアップ
+export type SignUpParams = {
+  name: string;
+  password: string;
+  passwordConfirmation: string;
+};
+
+// サインイン
+export type SignInParams = {
+  name: string;
+  password: string;
+};
