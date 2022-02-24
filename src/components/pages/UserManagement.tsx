@@ -22,7 +22,7 @@ export const UserManagement: VFC = memo(() => {
   //初回レンダリング時のみ実行
   useEffect(() => getUsers(), []);
 
-  //propsとして渡していく関数は毎回再作成してするとレンダリングの効率が悪い→useCallback
+  //propsとして渡していく関数は毎回再作成するとレンダリングの効率が悪い→useCallback
   const onClickUser = useCallback(
     (id: number) => {
       onSelectUser({ id, users, onOpen });
