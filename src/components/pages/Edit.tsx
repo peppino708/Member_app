@@ -23,7 +23,7 @@ export const Edit: VFC<Props> = memo((props) => {
   const { update, loading } = useUpadate();
   //未完
   const { loginUser } = useLoginUser();
-  console.log(loginUser?.name);
+  // console.log(loginUser?.name);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");

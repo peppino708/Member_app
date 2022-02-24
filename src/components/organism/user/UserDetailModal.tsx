@@ -16,7 +16,9 @@ import { useHistory } from "react-router-dom";
 import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
+//idバケツリレーになってしまっている？globalなstateで管理する?
 type Props = {
+  id: number | undefined;
   user: User | null;
   isOpen: boolean;
   isAdmin?: boolean;
@@ -24,7 +26,7 @@ type Props = {
 };
 
 export const UserDetailModal: VFC<Props> = memo((props) => {
-  const { user, isOpen, isAdmin = false, onClose } = props;
+  const { user, isOpen, isAdmin = false, onClose, id = undefined } = props;
   const history = useHistory();
 
   const [nickname, setNickname] = useState("");
@@ -48,7 +50,8 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
-  const onClickEdit = () => history.push("/home/:id/edit");
+  const onClickEdit = (id: number | undefined) =>
+    history.push(`/home/${id}/edit`);
 
   return (
     <Modal
@@ -100,7 +103,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
         {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
         {/* {isAdmin && ( */}
         <ModalFooter>
-          <PrimaryButton onClick={onClickEdit}>編集</PrimaryButton>
+          <PrimaryButton onClick={() => onClickEdit(id)}>編集</PrimaryButton>
         </ModalFooter>
         {/* )} */}
       </ModalContent>
