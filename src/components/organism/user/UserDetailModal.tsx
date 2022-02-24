@@ -51,7 +51,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
     setRecentImage(e.target.value);
 
   const onClickEdit = (id: number | undefined) =>
-    history.push(`/home/${id}/edit`);
+    history.push(`/home/:${id}/edit`);
 
   return (
     <Modal
