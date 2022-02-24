@@ -9,9 +9,8 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
-import { useLoginUser } from "../../hooks/useLoginUser";
 import { useUpadate } from "../../hooks/useUpadate";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
@@ -21,22 +20,11 @@ export const Edit: VFC<Props> = memo((props) => {
   // const {} = props;
   const history = useHistory();
   const { update, loading } = useUpadate();
-  //未完
-  const { loginUser } = useLoginUser();
-  console.log(loginUser?.name);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [recentImage, setRecentImage] = useState("");
-
-  //未完
-  useEffect(() => {
-    setNickname(loginUser?.nick_name ?? "");
-    setName(loginUser?.name ?? "");
-    setHobbies(loginUser?.hobbies ?? "");
-    setRecentImage(loginUser?.recent_image ?? "");
-  }, [loginUser]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
     setNickname(e.target.value);
