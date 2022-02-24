@@ -48,7 +48,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
-  const onClickUpdate = () => history.push("/home/edit");
+  const onClickEdit = () => history.push("/home/:id/edit");
 
   return (
     <Modal
@@ -100,7 +100,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
         {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
         {/* {isAdmin && ( */}
         <ModalFooter>
-          <PrimaryButton onClick={onClickUpdate}>編集</PrimaryButton>
+          <PrimaryButton onClick={onClickEdit}>編集</PrimaryButton>
         </ModalFooter>
         {/* )} */}
       </ModalContent>

@@ -21,7 +21,7 @@ export const homeRoutes = [
     children: <Setting />,
   },
   {
-    path: "/edit",
+    path: "/:id/edit",
     exact: false,
     children: <Edit />,
   },
