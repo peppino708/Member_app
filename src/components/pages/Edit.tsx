@@ -22,9 +22,7 @@ type Member = {
   id: string | undefined;
 };
 
-export const Edit: VFC<Props> = memo((props) => {
-  // const {} = props;
-
+export const Edit: VFC<Props> = memo(() => {
   const history = useHistory();
   const { update, loading } = useUpadate();
   const { id } = useParams<Member>();
@@ -61,7 +59,15 @@ export const Edit: VFC<Props> = memo((props) => {
     history.push("/home/edit");
   };
 
-  const onClickDelete = () => alert("削除しますか？");
+  const onClickDelete = () => {
+    const sure = window.confirm("削除しますか?");
+    if (sure) {
+      axios
+        .delete(`http://localhost:3000/api/v1/members/${id}`)
+        .then(() => history.push("/home/user_management"))
+        .catch((e) => console.log(e));
+    }
+  };
 
   return (
     <>
