@@ -65,6 +65,10 @@ export const Edit: VFC<Props> = memo(() => {
     history.push("/home/user_management");
   };
 
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
+
   const onClickDelete = () => {
     axios
       .delete(`http://localhost:3000/api/v1/members/${id}`)
@@ -74,10 +78,6 @@ export const Edit: VFC<Props> = memo(() => {
       })
       .catch((e) => console.log(e));
   };
-
-  const [isOpen, setIsOpen] = React.useState(false);
-  const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   return (
     <>
