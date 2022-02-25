@@ -9,6 +9,7 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useUpadate } from "../../hooks/useUpadate";
@@ -16,26 +17,34 @@ import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 type Props = {};
 
+type Member = {
+  id: string | undefined;
+};
+
 export const Edit: VFC<Props> = memo((props) => {
   // const {} = props;
 
   const history = useHistory();
   const { update, loading } = useUpadate();
-  const urlParams = useParams();
-  console.log(urlParams);
+  const { id } = useParams<Member>();
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [recentImage, setRecentImage] = useState("");
 
-  //未完
-  // useEffect(() => {
-  //   setNickname(state.nick_name ?? "");
-  //   setName(state.name ?? "");
-  //   setHobbies(state.hobbies ?? "");
-  //   setRecentImage(state.recent_image ?? "");
-  // }, [state]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/api/v1/members/${id}`)
+      .then((res) => {
+        const member = res.data;
+        setNickname(member.nick_name ?? "");
+        setName(member.name ?? "");
+        setHobbies(member.hobbies ?? "");
+        setRecentImage(member.recent_image ?? "");
+      })
+      .catch((e) => console.log(e));
+  }, [id]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
     setNickname(e.target.value);
