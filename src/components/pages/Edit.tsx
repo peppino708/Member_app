@@ -82,7 +82,7 @@ export const Edit: VFC<Props> = memo(() => {
               <FormLabel>名前</FormLabel>
               <Input
                 value={name}
-                onChange={onChangeNickname}
+                onChange={onChangeName}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>
@@ -90,7 +90,7 @@ export const Edit: VFC<Props> = memo(() => {
               <FormLabel>ニックネーム</FormLabel>
               <Input
                 value={nickname}
-                onChange={onChangeName}
+                onChange={onChangeNickname}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>

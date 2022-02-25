@@ -70,7 +70,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               <FormLabel>名前</FormLabel>
               <Input
                 value={name}
-                onChange={onChangeNickname}
+                onChange={onChangeName}
                 isReadOnly={!isAdmin}
               />
             </FormControl>
@@ -78,7 +78,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               <FormLabel>ニックネーム</FormLabel>
               <Input
                 value={nickname}
-                onChange={onChangeName}
+                onChange={onChangeNickname}
                 isReadOnly={!isAdmin}
               />
             </FormControl>
