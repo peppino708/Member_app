@@ -55,7 +55,7 @@ export const Edit: VFC<Props> = memo(() => {
     setRecentImage(e.target.value);
 
   const onClickUpdate = () => {
-    update(name, nickname, hobbies, recentImage);
+    update(id, name, nickname, hobbies, recentImage);
     history.push("/home/user_management");
   };
 

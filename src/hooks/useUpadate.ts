@@ -13,8 +13,8 @@ export const useUpadate = () => {
 
   const update = useCallback(
     (
-      // id: string,
-      userName: string,
+      id: string | undefined,
+      name: string,
       nickname: string,
       hobbies: string,
       recentImage: string
@@ -22,15 +22,13 @@ export const useUpadate = () => {
       setLoading(true);
 
       axios
-        .patch<User>(`http://localhost:3000/api/v1/members`, {
-          // .patch<User>(`http://localhost:3000/api/v1/members${id}`, {
-          name: userName,
+        .patch<User>(`http://localhost:3000/api/v1/members/${id}`, {
+          name: name,
           nick_name: nickname,
           hobbies: hobbies,
           recent_image: recentImage,
         })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           showMessage({ title: "更新しました", status: "success" });
           history.push("/home/user_management");
         })
