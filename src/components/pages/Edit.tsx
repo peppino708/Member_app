@@ -13,6 +13,7 @@ import axios from "axios";
 import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useUpadate } from "../../hooks/useUpadate";
+import { User } from "../../types/api/user";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 type Props = {};
@@ -35,7 +36,7 @@ export const Edit: VFC<Props> = memo((props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/members/${id}`)
+      .get<User>(`http://localhost:3000/api/v1/members/${id}`)
       .then((res) => {
         const member = res.data;
         setNickname(member.nick_name ?? "");
