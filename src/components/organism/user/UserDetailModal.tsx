@@ -54,12 +54,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
     history.push(`/home/${id}/edit`);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      autoFocus={false}
-      // motionPreset="slideInBottom"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent pb={2}>
         <ModalHeader>Member Profile</ModalHeader>
