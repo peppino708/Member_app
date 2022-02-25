@@ -1,4 +1,10 @@
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Box,
   Button,
   Divider,
@@ -10,7 +16,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import React, { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useUpadate } from "../../hooks/useUpadate";
 import { User } from "../../types/api/user";
@@ -60,14 +66,18 @@ export const Edit: VFC<Props> = memo(() => {
   };
 
   const onClickDelete = () => {
-    const sure = window.confirm("削除しますか?");
-    if (sure) {
-      axios
-        .delete(`http://localhost:3000/api/v1/members/${id}`)
-        .then(() => history.push("/home/user_management"))
-        .catch((e) => console.log(e));
-    }
+    axios
+      .delete(`http://localhost:3000/api/v1/members/${id}`)
+      .then(() => {
+        onClose();
+        history.push("/home/user_management");
+      })
+      .catch((e) => console.log(e));
   };
+
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -120,10 +130,36 @@ export const Edit: VFC<Props> = memo(() => {
               color="white"
               _hover={{ opacity: 0.8 }}
               isLoading={loading}
-              onClick={onClickDelete}
+              onClick={() => setIsOpen(true)}
             >
               削除
             </Button>
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete Member
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Are you sure? You can't undo this action afterwards.
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose}>
+                      Cancel
+                    </Button>
+                    <Button colorScheme="red" onClick={onClickDelete} ml={3}>
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
           </Stack>
         </Box>
       </Flex>
