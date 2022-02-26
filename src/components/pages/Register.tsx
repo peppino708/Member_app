@@ -1,4 +1,12 @@
-import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  Input,
+  Stack,
+} from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
@@ -22,7 +30,7 @@ export const Register: VFC = memo(() => {
     setHobbies(e.target.value);
 
   const [recentImage, setRecentImage] = useState("");
-  const onChangeRecentPicture = (e: ChangeEvent<HTMLInputElement>) =>
+  const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
 
   const onClickRegister = () =>
@@ -52,14 +60,26 @@ export const Register: VFC = memo(() => {
   };
 
   return (
-    <Flex align="center" justify="center" height="100vh" shadow="md">
-      <Box bg="white" w="sm" p={4} borderRadius="md">
+    <Flex align="center" justify="center" height="100vh" my={10}>
+      <Box
+        bg="white"
+        w={{ base: "sm", md: "md", lg: "lg" }}
+        p={4}
+        borderRadius="md"
+      >
         <Heading as="h1" size="lg" textAlign="center">
           Member App
         </Heading>
         <Divider my={4} />
         {/* stackは囲った中の要素を等間隔に配置していく */}
         <Stack spacing={6} py={4} px={10}>
+          <Image
+            borderRadius="full"
+            boxSize="160px"
+            src={"https://source.unsplash.com/random"}
+            alt={nickname}
+            m="auto"
+          />
           <Input
             placeholder="名前"
             value={userName}
@@ -81,9 +101,9 @@ export const Register: VFC = memo(() => {
             onKeyPress={onKeyPress}
           />
           <Input
-            placeholder="最近の一枚"
+            placeholder="最近のできごと"
             value={recentImage}
-            onChange={onChangeRecentPicture}
+            onChange={onChangeRecentImage}
             onKeyPress={onKeyPress}
           />
           <PrimaryButton
