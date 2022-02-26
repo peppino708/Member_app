@@ -60,7 +60,12 @@ export const Register: VFC = memo(() => {
   };
 
   return (
-    <Flex align="center" justify="center" height="100vh" my={10}>
+    <Flex
+      align="center"
+      justify="center"
+      height="100vh"
+      my={{ base: "10", md: "0" }}
+    >
       <Box
         bg="white"
         w={{ base: "sm", md: "md", lg: "lg" }}
@@ -70,7 +75,7 @@ export const Register: VFC = memo(() => {
         <Heading as="h1" size="lg" textAlign="center">
           Member App
         </Heading>
-        <Divider my={4} />
+        <Divider mt={4} mb={2} />
         {/* stackは囲った中の要素を等間隔に配置していく */}
         <Stack spacing={6} py={4} px={10}>
           <Image
