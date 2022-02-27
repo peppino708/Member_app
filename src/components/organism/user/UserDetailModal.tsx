@@ -86,7 +86,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>最近の1枚</FormLabel>
+              <FormLabel>最近のできごと</FormLabel>
               <Input
                 value={recentImage}
                 onChange={onChangeRecentImage}
