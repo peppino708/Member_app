@@ -60,12 +60,7 @@ export const Register: VFC = memo(() => {
   };
 
   return (
-    <Flex
-      align="center"
-      justify="center"
-      height="100vh"
-      my={{ base: "10", md: "0" }}
-    >
+    <Flex align="center" justify="center" height="100vh" my={10}>
       <Box
         bg="white"
         w={{ base: "sm", md: "md", lg: "lg" }}
