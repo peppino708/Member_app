@@ -37,7 +37,7 @@ export const MenuDrawer: VFC<Props> = memo((props) => {
               メンバー
             </Button>
             <Button w="100%" onClick={onClickSetting}>
-              設定
+              Tweet
             </Button>
             <Button w="100%" onClick={onClickLogout}>
               ログアウト
