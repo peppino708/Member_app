@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Center,
   Divider,
   Flex,
   Heading,
@@ -12,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 import { useRegister } from "../../hooks/useRegister";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
+import { BsCamera } from "react-icons/bs";
 
 export const Register: VFC = memo(() => {
   const { register, loading } = useRegister();
@@ -72,14 +75,18 @@ export const Register: VFC = memo(() => {
         </Heading>
         <Divider mt={4} mb={2} />
         {/* stackは囲った中の要素を等間隔に配置していく */}
+        <Image
+          borderRadius="full"
+          boxSize="160px"
+          src={"https://source.unsplash.com/random"}
+          alt={nickname}
+          mx="auto"
+          my={4}
+        />
+        <Center>
+          <Button leftIcon={<BsCamera />}>Upload</Button>
+        </Center>
         <Stack spacing={6} py={4} px={10}>
-          <Image
-            borderRadius="full"
-            boxSize="160px"
-            src={"https://source.unsplash.com/random"}
-            alt={nickname}
-            m="auto"
-          />
           <Input
             placeholder="名前"
             value={userName}
