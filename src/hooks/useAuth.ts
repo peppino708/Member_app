@@ -25,7 +25,7 @@ export const useAuth = () => {
             const isAdmin = res.data.id === 1 ? true : false;
             setLoginUser({ ...res.data, isAdmin });
             showMessage({ title: "ログインしました", status: "success" });
-            history.push("/home");
+            history.push("/home/user_management");
           } else {
             showMessage({ title: "ユーザーが見つかりません", status: "error" });
             setLoading(false);
