@@ -27,8 +27,7 @@ export const useRegister = () => {
           hobbies: hobbies,
           recent_image: recentImage,
         })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           showMessage({ title: "新規登録しました", status: "success" });
           history.push("/home/user_management");
         })
