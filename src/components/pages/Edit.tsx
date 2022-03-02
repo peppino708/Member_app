@@ -7,17 +7,21 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  Center,
   Divider,
   Flex,
   FormControl,
   FormLabel,
   Heading,
+  Image,
   Input,
   Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { BsCamera } from "react-icons/bs";
+
 import { useUpadate } from "../../hooks/useUpadate";
 import { User } from "../../types/api/user";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
@@ -81,12 +85,27 @@ export const Edit: VFC<Props> = memo(() => {
 
   return (
     <>
-      <Flex align="center" justify="center" height="100vh" shadow="md">
+      <Flex align="center" justify="center" height="100vh" my={20}>
         <Box bg="white" w="sm" p={4} borderRadius="md">
           <Heading as="h1" size="lg" textAlign="center">
-            Member App
+            Member Profile
           </Heading>
           <Divider my={4} />
+          <Image
+            borderRadius="full"
+            boxSize="160px"
+            src={
+              "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
+            }
+            alt={nickname}
+            mx="auto"
+            my={4}
+          />
+          <Center>
+            <Button size={"sm"} leftIcon={<BsCamera />}>
+              Upload
+            </Button>
+          </Center>
           <Stack spacing={4}>
             <FormControl>
               <FormLabel>名前</FormLabel>

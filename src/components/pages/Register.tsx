@@ -1,20 +1,9 @@
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  Image,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { ChangeEvent, memo, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 import { useRegister } from "../../hooks/useRegister";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
-import { BsCamera } from "react-icons/bs";
 
 export const Register: VFC = memo(() => {
   const { register, loading } = useRegister();
@@ -63,7 +52,7 @@ export const Register: VFC = memo(() => {
   };
 
   return (
-    <Flex align="center" justify="center" height="100vh" my={10}>
+    <Flex align="center" justify="center" height="100vh">
       <Box
         bg="white"
         w={{ base: "sm", md: "md", lg: "lg" }}
@@ -73,19 +62,8 @@ export const Register: VFC = memo(() => {
         <Heading as="h1" size="lg" textAlign="center">
           Member App
         </Heading>
-        <Divider mt={4} mb={2} />
+        <Divider my={4} />
         {/* stackは囲った中の要素を等間隔に配置していく */}
-        <Image
-          borderRadius="full"
-          boxSize="160px"
-          src={"https://source.unsplash.com/random"}
-          alt={nickname}
-          mx="auto"
-          my={4}
-        />
-        <Center>
-          <Button leftIcon={<BsCamera />}>Upload</Button>
-        </Center>
         <Stack spacing={6} py={4} px={10}>
           <Input
             placeholder="名前"
