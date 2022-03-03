@@ -10,11 +10,8 @@ import {
   Center,
   Divider,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   Image,
-  Input,
   Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -25,6 +22,7 @@ import { BsCamera } from "react-icons/bs";
 import { useUpadate } from "../../hooks/useUpadate";
 import { User } from "../../types/api/user";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
+import { FormControl, TextField } from "@material-ui/core";
 
 type Props = {};
 
@@ -85,7 +83,7 @@ export const Edit: VFC<Props> = memo(() => {
 
   return (
     <>
-      <Flex align="center" justify="center" height="100vh" my={20}>
+      <Flex align="center" justify="center" height="100vh" my={16}>
         <Box bg="white" w="sm" p={4} borderRadius="md">
           <Heading as="h1" size="lg" textAlign="center">
             Member Profile
@@ -101,39 +99,44 @@ export const Edit: VFC<Props> = memo(() => {
             mx="auto"
             my={4}
           />
-          <Center>
+          <Center mb={4}>
             <Button size={"sm"} leftIcon={<BsCamera />}>
               Upload
             </Button>
           </Center>
           <Stack spacing={4}>
             <FormControl>
-              <FormLabel>名前</FormLabel>
-              <Input
+              <TextField
+                autoFocus
+                label="名前"
+                variant="outlined"
                 value={name}
                 onChange={onChangeName}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>ニックネーム</FormLabel>
-              <Input
+              <TextField
+                label="ニックネーム"
+                variant="outlined"
                 value={nickname}
                 onChange={onChangeNickname}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>趣味</FormLabel>
-              <Input
+              <TextField
+                label="趣味"
+                variant="outlined"
                 value={hobbies}
                 onChange={onChangeHobbies}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>最近のできごと</FormLabel>
-              <Input
+              <TextField
+                label="最近のできごと"
+                variant="outlined"
                 value={recentImage}
                 onChange={onChangeRecentImage}
                 // isReadOnly={!isAdmin}
