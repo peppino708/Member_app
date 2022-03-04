@@ -83,10 +83,10 @@ export const Edit: VFC<Props> = memo(() => {
 
   return (
     <>
-      <Flex align="center" justify="center" height="100vh" my={16}>
+      <Flex align="center" justify="center" height="100vh" my={10}>
         <Box bg="white" w="sm" p={4} borderRadius="md">
-          <Heading as="h1" size="lg" textAlign="center">
-            Member Profile
+          <Heading as="h2" size="lg" textAlign="center">
+            Edit Member
           </Heading>
           <Divider my={4} />
           <Image
