@@ -1,7 +1,4 @@
 import {
-  FormControl,
-  FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -15,6 +12,7 @@ import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
+import { FormControl, TextField } from "@material-ui/core";
 
 //idバケツリレーになってしまっている？globalなstateで管理する?
 type Props = {
@@ -26,7 +24,7 @@ type Props = {
 };
 
 export const UserDetailModal: VFC<Props> = memo((props) => {
-  const { user, isOpen, isAdmin = false, onClose, id = undefined } = props;
+  const { user, isOpen, onClose, id = undefined } = props;
   const history = useHistory();
 
   const [nickname, setNickname] = useState("");
@@ -62,35 +60,43 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
         <ModalBody mx={4}>
           <Stack spacing={4}>
             <FormControl>
-              <FormLabel>名前</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="名前"
+                variant="outlined"
                 value={name}
                 onChange={onChangeName}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>ニックネーム</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="ニックネーム"
+                variant="outlined"
                 value={nickname}
                 onChange={onChangeNickname}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>趣味</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="趣味"
+                variant="outlined"
                 value={hobbies}
                 onChange={onChangeHobbies}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>最近のできごと</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="最近のできごと"
+                variant="outlined"
                 value={recentImage}
                 onChange={onChangeRecentImage}
-                isReadOnly={!isAdmin}
+                // inputProps={{readOnly: true}}
               />
             </FormControl>
           </Stack>
