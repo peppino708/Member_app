@@ -37,5 +37,5 @@ export const useUpadate = () => {
     },
     [history, showMessage]
   );
-  return { update, loading };
+  return { update, loading, setLoading };
 };
