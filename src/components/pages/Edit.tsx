@@ -22,7 +22,13 @@ import { BsCamera } from "react-icons/bs";
 import { useUpadate } from "../../hooks/useUpadate";
 import { User } from "../../types/api/user";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
-import { FormControl, TextField } from "@material-ui/core";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  TextField,
+} from "@material-ui/core";
+import Input from "@material-ui/core/Input";
 
 type Props = {};
 
@@ -32,13 +38,14 @@ type Member = {
 
 export const Edit: VFC<Props> = memo(() => {
   const history = useHistory();
-  const { update, loading } = useUpadate();
+  const { update, loading, setLoading } = useUpadate();
   const { id } = useParams<Member>();
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [recentImage, setRecentImage] = useState("");
+  const [profileImage, setProfileImage] = useState<File>();
 
   useEffect(() => {
     axios
@@ -61,6 +68,41 @@ export const Edit: VFC<Props> = memo(() => {
     setHobbies(e.target.value);
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentImage(e.target.value);
+
+  const profileImageHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!e.target.files) return;
+
+    setLoading(true);
+
+    const file = e.target.files[0];
+    const formData = new FormData();
+
+    formData.append("profileImage", file);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post(
+        `http://localhost:3000/api/v1/members/${id}`,
+        formData,
+        config
+      );
+
+      setProfileImage(data.profile_image);
+      setLoading(false);
+
+      // dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   const onClickUpdate = () => {
     update(id, name, nickname, hobbies, recentImage);
@@ -93,6 +135,8 @@ export const Edit: VFC<Props> = memo(() => {
             borderRadius="full"
             boxSize="160px"
             src={
+              // profileImage
+              //   ? profileImage :
               "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
             }
             alt={nickname}
@@ -100,9 +144,28 @@ export const Edit: VFC<Props> = memo(() => {
             my={4}
           />
           <Center mb={4}>
-            <Button size={"sm"} leftIcon={<BsCamera />}>
-              Upload
-            </Button>
+            <InputLabel htmlFor="profile-image">
+              <Input
+                id="profile-image"
+                type="file"
+                name="profile-image"
+                style={{ display: "none" }}
+                onChange={profileImageHandler}
+              />
+
+              <IconButton
+                style={{
+                  backgroundColor: "#f50057",
+                }}
+                component="span"
+              >
+                <BsCamera
+                  style={{
+                    color: "#fff",
+                  }}
+                />
+              </IconButton>
+            </InputLabel>
           </Center>
           <Stack spacing={4}>
             <FormControl>
