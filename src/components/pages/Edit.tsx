@@ -52,6 +52,7 @@ export const Edit: VFC<Props> = memo(() => {
       .get<User>(`http://localhost:3000/api/v1/members/${id}`)
       .then((res) => {
         const member = res.data;
+        setProfileImage(member.profile_image.url ?? "");
         setNickname(member.nick_name ?? "");
         setName(member.name ?? "");
         setHobbies(member.hobbies ?? "");
