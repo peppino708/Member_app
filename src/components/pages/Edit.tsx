@@ -18,10 +18,6 @@ import axios from "axios";
 import React, { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { BsCamera } from "react-icons/bs";
-
-import { useUpadate } from "../../hooks/useUpadate";
-import { User } from "../../types/api/user";
-import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import {
   FormControl,
   IconButton,
@@ -29,6 +25,11 @@ import {
   TextField,
 } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
+
+import { useUpadate } from "../../hooks/useUpadate";
+import { User } from "../../types/api/user";
+import { useMessage } from "../../hooks/useMessage";
+import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 type Props = {};
 
@@ -40,6 +41,7 @@ export const Edit: VFC<Props> = memo(() => {
   const history = useHistory();
   const { update, loading, setLoading } = useUpadate();
   const { id } = useParams<Member>();
+  const { showMessage } = useMessage();
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -97,10 +99,11 @@ export const Edit: VFC<Props> = memo(() => {
 
       setProfileImage(data.profile_image.url);
       setLoading(false);
+      showMessage({ title: "アップロード完了", status: "success" });
 
       // dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
-      console.log(error);
+      showMessage({ title: "アップロードに失敗しました", status: "error" });
       setLoading(false);
     }
   };
