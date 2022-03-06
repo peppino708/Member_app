@@ -45,7 +45,7 @@ export const Edit: VFC<Props> = memo(() => {
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [recentImage, setRecentImage] = useState("");
-  const [profileImage, setProfileImage] = useState<File>();
+  const [profileImage, setProfileImage] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -94,7 +94,7 @@ export const Edit: VFC<Props> = memo(() => {
         config
       );
 
-      setProfileImage(data.profile_image);
+      setProfileImage(data.profile_image.url);
       setLoading(false);
 
       // dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
@@ -135,9 +135,9 @@ export const Edit: VFC<Props> = memo(() => {
             borderRadius="full"
             boxSize="160px"
             src={
-              // profileImage
-              //   ? profileImage :
-              "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
+              profileImage
+                ? profileImage
+                : "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
             }
             alt={nickname}
             mx="auto"
