@@ -79,7 +79,7 @@ export const Edit: VFC<Props> = memo(() => {
     const file = e.target.files[0];
     const formData = new FormData();
 
-    formData.append("profile_image", file);
+    formData.append("member[profile_image]", file);
 
     try {
       const config = {
