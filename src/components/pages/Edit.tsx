@@ -79,7 +79,7 @@ export const Edit: VFC<Props> = memo(() => {
     const file = e.target.files[0];
     const formData = new FormData();
 
-    formData.append("profileImage", file);
+    formData.append("profile_image", file);
 
     try {
       const config = {
@@ -88,7 +88,7 @@ export const Edit: VFC<Props> = memo(() => {
         },
       };
 
-      const { data } = await axios.post(
+      const { data } = await axios.patch(
         `http://localhost:3000/api/v1/members/${id}`,
         formData,
         config
