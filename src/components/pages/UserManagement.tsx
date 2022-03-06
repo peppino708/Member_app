@@ -41,7 +41,11 @@ export const UserManagement: VFC = memo(() => {
           {users.map((user) => (
             <WrapItem key={user.id}>
               <UserCard
-                imageUrl="https://source.unsplash.com/random"
+                imageUrl={
+                  user.profile_image.url
+                    ? user.profile_image.url
+                    : "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
+                }
                 nickname={user.nick_name}
                 fullName={user.name}
                 onClick={onClickUser}
