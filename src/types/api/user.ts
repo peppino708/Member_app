@@ -4,6 +4,9 @@ export type User = {
   nick_name: string;
   hobbies: string;
   recent_image: string;
+  profile_image: {
+    url: string;
+  };
 };
 
 // サインアップ
