@@ -31,17 +31,18 @@ import { User } from "../../types/api/user";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
-type Props = {};
-
 type Member = {
   id: string | undefined;
 };
 
-export const Edit: VFC<Props> = memo(() => {
+export const Edit: VFC = memo(() => {
   const history = useHistory();
   const { update, loading, setLoading } = useUpadate();
   const { id } = useParams<Member>();
   const { showMessage } = useMessage();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -113,10 +114,6 @@ export const Edit: VFC<Props> = memo(() => {
     history.push("/home/user_management");
   };
 
-  const [isOpen, setIsOpen] = React.useState(false);
-  const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef<HTMLButtonElement>(null);
-
   const onClickDelete = () => {
     axios
       .delete(`http://localhost:3000/api/v1/members/${id}`)
@@ -124,7 +121,10 @@ export const Edit: VFC<Props> = memo(() => {
         onClose();
         history.push("/home/user_management");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        showMessage({ title: "削除できません", status: "error" });
+      });
   };
 
   return (
