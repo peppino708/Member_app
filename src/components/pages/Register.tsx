@@ -32,14 +32,13 @@ export const Register: VFC = memo(() => {
 
   const onClickLoginBack = () => history.push("/");
 
+  const isDisabled =
+    hobbies === "" || userName === "" || nickname === "" || recentImage === "";
+
+  //せいじリファクタリングアドバイス→ifのネストもっとシンプルにできる。if()return早めにreturnしちゃう
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (
-        hobbies === "" ||
-        userName === "" ||
-        nickname === "" ||
-        recentImage === ""
-      ) {
+      if (isDisabled) {
         showMessage({
           title: "入力されていない項目があります",
           status: "error",
@@ -92,12 +91,7 @@ export const Register: VFC = memo(() => {
             onKeyPress={onKeyPress}
           />
           <PrimaryButton
-            disabled={
-              hobbies === "" ||
-              userName === "" ||
-              nickname === "" ||
-              recentImage === ""
-            }
+            disabled={isDisabled}
             loading={loading}
             onClick={onClickRegister}
           >
