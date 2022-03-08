@@ -50,18 +50,25 @@ export const Edit: VFC = memo(() => {
   const [recentImage, setRecentImage] = useState("");
   const [profileImage, setProfileImage] = useState<string>("");
 
+  //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
   useEffect(() => {
+    let isMounted = true;
     axios
       .get<User>(`http://localhost:3000/api/v1/members/${id}`)
       .then((res) => {
         const member = res.data;
-        setProfileImage(member.profile_image.url ?? "");
-        setNickname(member.nick_name ?? "");
-        setName(member.name ?? "");
-        setHobbies(member.hobbies ?? "");
-        setRecentImage(member.recent_image ?? "");
+        if (isMounted) {
+          setProfileImage(member.profile_image.url ?? "");
+          setNickname(member.nick_name ?? "");
+          setName(member.name ?? "");
+          setHobbies(member.hobbies ?? "");
+          setRecentImage(member.recent_image ?? "");
+        }
       })
       .catch((e) => console.log(e));
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
