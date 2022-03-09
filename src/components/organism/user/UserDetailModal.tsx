@@ -96,7 +96,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
                 variant="outlined"
                 value={recentImage}
                 onChange={onChangeRecentImage}
-                // inputProps={{readOnly: true}}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
           </Stack>
