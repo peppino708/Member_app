@@ -1,6 +1,6 @@
 import { Edit } from "../components/pages/Edit";
 import { Home } from "../components/pages/Home";
-import { Setting } from "../components/pages/Setting";
+import { Tweet } from "../components/pages/Tweet";
 import { UserManagement } from "../components/pages/UserManagement";
 import { Page404 } from "../Page404";
 
@@ -16,9 +16,9 @@ export const homeRoutes = [
     children: <UserManagement />,
   },
   {
-    path: "/setting",
+    path: "/tweet",
     exact: false,
-    children: <Setting />,
+    children: <Tweet />,
   },
   {
     path: "/:id/edit",

@@ -14,7 +14,7 @@ const textArr = [
   "こんにちは！",
 ];
 
-export const Setting: VFC = memo(() => {
+export const Tweet: VFC = memo(() => {
   return (
     <Wrap p={{ base: 4, md: 10 }} justify="space-around">
       {textArr.map((text, i) => {

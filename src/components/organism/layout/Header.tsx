@@ -48,7 +48,7 @@ export const Header: VFC = memo(() => {
             <Link to="/home/user_management">メンバー</Link>
           </Box>
           <Box pr={4} _hover={{ textDecoration: "underline" }}>
-            <Link to="/home/setting">Tweet</Link>
+            <Link to="/home/tweet">Tweet</Link>
           </Box>
           <Box pr={4} _hover={{ textDecoration: "underline" }}>
             <Link to="/">ログアウト</Link>
