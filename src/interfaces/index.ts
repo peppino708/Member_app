@@ -19,8 +19,12 @@ export interface User {
   provider: string;
   email: string;
   name: string;
-  nickname?: string;
-  image?: string;
+  nickname: string;
+  image: {
+    url: string;
+  };
+  hobbies: string;
+  recent_topic: string;
   allowPasswordChange: boolean;
   created_at: Date;
   updated_at: Date;

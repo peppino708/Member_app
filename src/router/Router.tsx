@@ -3,7 +3,6 @@ import { createContext, memo, useEffect, useState, VFC } from "react";
 import { Login } from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes";
 import { Page404 } from "../Page404";
-import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
 import { Register } from "../components/pages/Register";
 import SignUp from "../components/pages/SignUp";
@@ -57,17 +56,17 @@ export const Router: VFC = memo(() => {
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
-  const Private = ({ children }: { children: React.ReactElement }) => {
-    if (!loading) {
-      if (isSignedIn) {
-        return children;
-      } else {
-        return <Redirect to="/signin" />;
-      }
-    } else {
-      return <></>;
-    }
-  };
+  // const Private = ({ children }: { children: React.ReactElement }) => {
+  //   if (!loading) {
+  //     if (isSignedIn) {
+  //       return children;
+  //     } else {
+  //       return <Redirect to="/signin" />;
+  //     }
+  //   } else {
+  //     return <></>;
+  //   }
+  // };
   return (
     <Switch>
       <AuthContext.Provider
@@ -94,9 +93,9 @@ export const Router: VFC = memo(() => {
             <Route path="/signup">
               <SignUp />
             </Route>
-            <Private>
-              <Route exact path="/" component={Home2} />
-            </Private>
+            {/* <Private> */}
+            <Route exact path="/" component={Home2} />
+            {/* </Private> */}
             <Route
               path="/home"
               render={({ match: { url } }) => (
@@ -107,7 +106,7 @@ export const Router: VFC = memo(() => {
                       exact={route.exact}
                       path={`${url}${route.path}`}
                     >
-                      <HeaderLayout>{route.children}</HeaderLayout>
+                      {route.children}
                     </Route>
                   ))}
                 </Switch>

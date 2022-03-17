@@ -2,7 +2,7 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { User } from "../types/api/user";
+import { User } from "../interfaces/index";
 import { useMessage } from "./useMessage";
 
 export const useUpadate = () => {
@@ -22,7 +22,7 @@ export const useUpadate = () => {
       setLoading(true);
 
       axios
-        .patch<User>(`http://localhost:3000/api/v1/members/${id}`, {
+        .patch<User>(`http://localhost:3000/api/v1/auth/members/${id}`, {
           name: name,
           nick_name: nickname,
           hobbies: hobbies,

@@ -27,7 +27,7 @@ import {
 import Input from "@material-ui/core/Input";
 
 import { useUpadate } from "../../hooks/useUpadate";
-import { User } from "../../types/api/user";
+import { User } from "../../interfaces/index";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
@@ -54,15 +54,15 @@ export const Edit: VFC = memo(() => {
   useEffect(() => {
     let isMounted = true;
     axios
-      .get<User>(`http://localhost:3000/api/v1/members/${id}`)
+      .get<User>(`http://localhost:3000/api/v1/auth/members/${id}`)
       .then((res) => {
         const member = res.data;
         if (isMounted) {
-          setProfileImage(member.profile_image.url ?? "");
-          setNickname(member.nick_name ?? "");
+          setProfileImage(member.image.url ?? "");
+          setNickname(member.nickname ?? "");
           setName(member.name ?? "");
           setHobbies(member.hobbies ?? "");
-          setRecentImage(member.recent_image ?? "");
+          setRecentImage(member.recent_topic ?? "");
         }
       })
       .catch((e) => console.log(e));
@@ -90,7 +90,7 @@ export const Edit: VFC = memo(() => {
     const file = e.target.files[0];
     const formData = new FormData();
 
-    formData.append("member[profile_image]", file);
+    formData.append("member[image]", file);
 
     try {
       const config = {
@@ -100,12 +100,12 @@ export const Edit: VFC = memo(() => {
       };
 
       const { data } = await axios.patch(
-        `http://localhost:3000/api/v1/members/${id}`,
+        `http://localhost:3000/api/v1/auth/members/${id}`,
         formData,
         config
       );
 
-      setProfileImage(data.profile_image.url);
+      setProfileImage(data.image.url);
       setLoading(false);
       showMessage({ title: "アップロード完了", status: "success" });
 
@@ -123,7 +123,7 @@ export const Edit: VFC = memo(() => {
 
   const onClickDelete = () => {
     axios
-      .delete(`http://localhost:3000/api/v1/members/${id}`)
+      .delete(`http://localhost:3000/api/v1/auth/members/${id}`)
       .then(() => {
         onClose();
         history.push("/home/user_management");

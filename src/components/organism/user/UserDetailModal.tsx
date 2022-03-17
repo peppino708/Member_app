@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
-import { User } from "../../../types/api/user";
+import { User } from "../../../interfaces/index";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 import { FormControl, TextField } from "@material-ui/core";
 
@@ -30,13 +30,13 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
-  const [recentImage, setRecentImage] = useState("");
+  const [recentTopic, setRecentTopic] = useState("");
 
   useEffect(() => {
-    setNickname(user?.nick_name ?? "");
+    setNickname(user?.nickname ?? "");
     setName(user?.name ?? "");
     setHobbies(user?.hobbies ?? "");
-    setRecentImage(user?.recent_image ?? "");
+    setRecentTopic(user?.recent_topic ?? "");
   }, [user]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
@@ -46,7 +46,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
     setHobbies(e.target.value);
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
-    setRecentImage(e.target.value);
+    setRecentTopic(e.target.value);
 
   const onClickEdit = (id: number | undefined) =>
     history.push(`/home/${id}/edit`);
@@ -94,7 +94,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
                 margin="normal"
                 label="最近のできごと"
                 variant="outlined"
-                value={recentImage}
+                value={recentTopic}
                 onChange={onChangeRecentImage}
                 inputProps={{ readOnly: true }}
               />

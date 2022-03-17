@@ -18,7 +18,7 @@ export const useAuth = () => {
       setLoading(true);
 
       axios
-        .get<User>(`http://localhost:3000/api/v1/members/${id}`)
+        .get<User>(`http://localhost:3000/api/v1/auth/members/${id}`)
         .then((res) => {
           if (res.data) {
             //isAdminフラグ機能していない...

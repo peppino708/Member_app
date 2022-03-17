@@ -25,7 +25,7 @@ export const Login: VFC = memo(() => {
   };
 
   return (
-    <Flex align="center" justify="center" height="100vh" shadow="md">
+    <Flex align="center" justify="center" height="100vh">
       <Box bg="white" w="sm" p={4} borderRadius="md">
         <Heading as="h1" size="lg" textAlign="center">
           Member App
