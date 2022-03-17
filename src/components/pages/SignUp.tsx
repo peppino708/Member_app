@@ -9,7 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 
-import { AuthContext } from "../../App2";
+import { AuthContext } from "../../router/Router";
 import AlertMessage from "../../components/utils/AlertMessage";
 import { signUp } from "../../lib/api/auth";
 import { SignUpParams } from "../../interfaces/index";

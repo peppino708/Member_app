@@ -11,7 +11,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
-import { AuthContext } from "../../App2";
+import { AuthContext } from "../../router/Router";
 import AlertMessage from "../../components/utils/AlertMessage";
 import { signIn } from "../../lib/api/auth";
 import { SignInParams } from "../../interfaces/index";
