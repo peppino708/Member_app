@@ -1,3 +1,4 @@
+import { Image } from "@chakra-ui/react";
 import React, { useContext } from "react";
 
 import { AuthContext } from "../../router/Router";
@@ -10,6 +11,12 @@ const Home2: React.FC = () => {
     <>
       {isSignedIn && currentUser ? (
         <>
+          <Image
+            borderRadius="full"
+            boxSize="160px"
+            src={currentUser.image.url}
+            m="auto"
+          />
           <h1>Signed in successfully!</h1>
           <h2>Email: {currentUser?.email}</h2>
           <h2>Name: {currentUser?.name}</h2>
