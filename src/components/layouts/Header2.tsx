@@ -165,17 +165,21 @@ const Header2: React.FC = () => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.iconButton}
-            color="inherit"
-            onClick={toggleDrawer}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Drawer anchor="left" open={state} onClose={toggleDrawer}>
-            {list()}
-          </Drawer>
+          {isSignedIn && (
+            <>
+              <IconButton
+                edge="start"
+                className={classes.iconButton}
+                color="inherit"
+                onClick={toggleDrawer}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer anchor="left" open={state} onClose={toggleDrawer}>
+                {list()}
+              </Drawer>
+            </>
+          )}
           <Typography
             component={Link}
             to="/"
