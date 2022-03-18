@@ -8,11 +8,12 @@ import {
   ModalOverlay,
   Stack,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { User } from "../../../interfaces/index";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 import { FormControl, TextField } from "@material-ui/core";
+import { AuthContext } from "../../../router/Router";
 
 //idバケツリレーになってしまっている？globalなstateで管理する?
 type Props = {
@@ -26,6 +27,7 @@ type Props = {
 export const UserDetailModal: VFC<Props> = memo((props) => {
   const { user, isOpen, onClose, id = undefined } = props;
   const history = useHistory();
+  const { currentUser } = useContext(AuthContext);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -102,11 +104,11 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
           </Stack>
         </ModalBody>
         {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
-        {/* {isAdmin && ( */}
-        <ModalFooter>
-          <PrimaryButton onClick={() => onClickEdit(id)}>編集</PrimaryButton>
-        </ModalFooter>
-        {/* )} */}
+        {currentUser?.id === id && (
+          <ModalFooter>
+            <PrimaryButton onClick={() => onClickEdit(id)}>編集</PrimaryButton>
+          </ModalFooter>
+        )}
       </ModalContent>
     </Modal>
   );
