@@ -113,11 +113,33 @@ const Header2: React.FC = () => {
     setState(!state);
   };
 
+  const history = useHistory();
+
+  const onClickHandler = (index: number) => {
+    switch (index) {
+      case 0:
+        history.push("/home/user_management");
+        break;
+      case 1:
+        history.push("/home/tweet");
+        break;
+      case 2:
+        history.push("/");
+        break;
+      default:
+        return;
+    }
+  };
+
   const list = () => (
     <Box role="presentation" onClick={toggleDrawer}>
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+        {["Member", "Tweet", "Mypage"].map((text, index) => (
+          <ListItem
+            button={true}
+            onClick={() => onClickHandler(index)}
+            key={text}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <Inbox /> : <Mail />}
             </ListItemIcon>
@@ -127,8 +149,8 @@ const Header2: React.FC = () => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+        {["Signout"].map((text, index) => (
+          <ListItem button={true} key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <Inbox /> : <Mail />}
             </ListItemIcon>
