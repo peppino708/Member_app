@@ -2,7 +2,6 @@ module Api
   module V1
     module Auth
       class MembersController < ApplicationController
-        before_action :authenticate_member!
         before_action :set_member, only: [:show, :update, :destroy]
 
         def index
