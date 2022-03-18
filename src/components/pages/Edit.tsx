@@ -47,7 +47,7 @@ export const Edit: VFC = memo(() => {
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
-  const [recentImage, setRecentImage] = useState("");
+  const [recentTopic, setRecentTopic] = useState("");
   const [profileImage, setProfileImage] = useState<string>("");
 
   //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
@@ -62,7 +62,7 @@ export const Edit: VFC = memo(() => {
           setNickname(member.nickname ?? "");
           setName(member.name ?? "");
           setHobbies(member.hobbies ?? "");
-          setRecentImage(member.recent_topic ?? "");
+          setRecentTopic(member.recent_topic ?? "");
         }
       })
       .catch((e) => console.log(e));
@@ -78,7 +78,7 @@ export const Edit: VFC = memo(() => {
   const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
     setHobbies(e.target.value);
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
-    setRecentImage(e.target.value);
+    setRecentTopic(e.target.value);
 
   const profileImageHandler = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -117,7 +117,7 @@ export const Edit: VFC = memo(() => {
   };
 
   const onClickUpdate = () => {
-    update(id, name, nickname, hobbies, recentImage);
+    update(id, name, nickname, hobbies, recentTopic);
     history.push("/home/user_management");
   };
 
@@ -211,7 +211,7 @@ export const Edit: VFC = memo(() => {
               <TextField
                 label="最近のできごと"
                 variant="outlined"
-                value={recentImage}
+                value={recentTopic}
                 onChange={onChangeRecentImage}
                 // isReadOnly={!isAdmin}
               />

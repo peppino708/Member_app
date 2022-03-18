@@ -17,16 +17,16 @@ export const useUpadate = () => {
       name: string,
       nickname: string,
       hobbies: string,
-      recentImage: string
+      recentTopic: string
     ) => {
       setLoading(true);
 
       axios
         .patch<User>(`http://localhost:3000/api/v1/auth/members/${id}`, {
           name: name,
-          nick_name: nickname,
+          nickname: nickname,
           hobbies: hobbies,
-          recent_image: recentImage,
+          recent_topic: recentTopic,
         })
         .then(() => {
           showMessage({ title: "更新しました", status: "success" });
