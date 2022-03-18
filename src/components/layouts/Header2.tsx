@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -14,6 +14,16 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { signOut } from "../../lib/api/auth";
 
 import { AuthContext } from "../../router/Router";
+import {
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
+import { Inbox, Mail } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) => ({
   iconButton: {
@@ -97,6 +107,38 @@ const Header2: React.FC = () => {
     }
   };
 
+  const [state, setState] = useState(false);
+
+  const toggleDrawer = () => {
+    setState(!state);
+  };
+
+  const list = () => (
+    <Box role="presentation" onClick={toggleDrawer}>
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <Inbox /> : <Mail />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <Inbox /> : <Mail />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <>
       <AppBar position="static">
@@ -105,16 +147,20 @@ const Header2: React.FC = () => {
             edge="start"
             className={classes.iconButton}
             color="inherit"
+            onClick={toggleDrawer}
           >
             <MenuIcon />
           </IconButton>
+          <Drawer anchor="left" open={state} onClose={toggleDrawer}>
+            {list()}
+          </Drawer>
           <Typography
             component={Link}
             to="/"
             variant="h6"
             className={classes.title}
           >
-            Sample
+            Member App
           </Typography>
           <AuthButtons />
         </Toolbar>
