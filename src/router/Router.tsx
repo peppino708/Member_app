@@ -56,17 +56,18 @@ export const Router: VFC = memo(() => {
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
-  // const Private = ({ children }: { children: React.ReactElement }) => {
-  //   if (!loading) {
-  //     if (isSignedIn) {
-  //       return children;
-  //     } else {
-  //       return <Redirect to="/signin" />;
-  //     }
-  //   } else {
-  //     return <></>;
-  //   }
-  // };
+  const Private = ({ children }: { children: React.ReactElement }) => {
+    if (!loading) {
+      if (isSignedIn) {
+        return children;
+      } else {
+        return <Redirect to="/signin" />;
+      }
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <Switch>
       <AuthContext.Provider
@@ -81,21 +82,21 @@ export const Router: VFC = memo(() => {
       >
         <CommonLayout>
           <LoginUserProvider>
-            <Route exact path="/login">
+            {/* <Route exact path="/login">
               <Login />
             </Route>
             <Route path="/register">
               <Register />
-            </Route>
+            </Route> */}
             <Route path="/signin">
               <SignIn />
             </Route>
             <Route path="/signup">
               <SignUp />
             </Route>
-            {/* <Private> */}
-            <Route exact path="/" component={Home2} />
-            {/* </Private> */}
+            <Private>
+              <Route exact path="/" component={Home2} />
+            </Private>
             <Route
               path="/home"
               render={({ match: { url } }) => (
