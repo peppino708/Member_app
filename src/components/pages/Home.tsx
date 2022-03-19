@@ -14,7 +14,11 @@ export const Home: React.FC = () => {
           <Image
             borderRadius="full"
             boxSize="160px"
-            src={currentUser.image.url}
+            src={
+              currentUser.image.url
+                ? currentUser.image.url
+                : "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
+            }
             m="auto"
           />
           <h1>Signed in successfully!</h1>
