@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Header2: React.FC = () => {
+export const Header: React.FC = () => {
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext);
   const classes = useStyles();
   const histroy = useHistory();
@@ -194,5 +194,3 @@ const Header2: React.FC = () => {
     </>
   );
 };
-
-export default Header2;

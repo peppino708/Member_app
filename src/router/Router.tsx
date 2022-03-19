@@ -1,10 +1,8 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import { createContext, memo, useEffect, useState, VFC } from "react";
-import { Login } from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes";
 import { Page404 } from "../Page404";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
-import { Register } from "../components/pages/Register";
 import SignUp from "../components/pages/SignUp";
 import { User } from "../interfaces";
 import SignIn from "../components/pages/SignIn";
@@ -82,12 +80,6 @@ export const Router: VFC = memo(() => {
       >
         <CommonLayout>
           <LoginUserProvider>
-            {/* <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route> */}
             <Route path="/signin">
               <SignIn />
             </Route>
