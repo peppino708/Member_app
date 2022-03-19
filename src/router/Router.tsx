@@ -10,7 +10,7 @@ import { User } from "../interfaces";
 import SignIn from "../components/pages/SignIn";
 import { getCurrentUser } from "../lib/api/auth";
 import CommonLayout from "../components/layouts/CommonLayout";
-import Home2 from "../components/pages/Home2";
+import { Home } from "../components/pages/Home";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -95,7 +95,7 @@ export const Router: VFC = memo(() => {
               <SignUp />
             </Route>
             <Private>
-              <Route exact path="/" component={Home2} />
+              <Route exact path="/" component={Home} />
             </Private>
             <Route
               path="/home"
