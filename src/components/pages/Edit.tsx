@@ -86,7 +86,7 @@ export const Edit: VFC = memo(() => {
     setName(e.target.value);
   const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
     setHobbies(e.target.value);
-  const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
+  const onChangeRecentTopic = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentTopic(e.target.value);
 
   const profileImageHandler = async (
@@ -223,7 +223,7 @@ export const Edit: VFC = memo(() => {
                 label="最近のできごと"
                 variant="outlined"
                 value={recentTopic}
-                onChange={onChangeRecentImage}
+                onChange={onChangeRecentTopic}
                 // isReadOnly={!isAdmin}
               />
             </FormControl>
