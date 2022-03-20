@@ -137,6 +137,7 @@ export const Edit: VFC = memo(() => {
       .then(() => {
         onClose();
         history.push("/home/user_management");
+        showMessage({ title: "削除しました", status: "success" });
       })
       .catch((e) => {
         console.log(e);

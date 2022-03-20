@@ -13,6 +13,7 @@ import { AuthContext } from "../../router/Router";
 import AlertMessage from "../../components/utils/AlertMessage";
 import { signUp } from "../../lib/api/auth";
 import { SignUpParams } from "../../interfaces/index";
+import { useMessage } from "../../hooks/useMessage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -38,6 +39,7 @@ const SignUp: React.FC = () => {
   const histroy = useHistory();
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+  const { showMessage } = useMessage();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -71,6 +73,7 @@ const SignUp: React.FC = () => {
 
         histroy.push("/");
 
+        showMessage({ title: "新規登録が完了しました", status: "success" });
         console.log("Signed in successfully!");
       } else {
         setAlertMessageOpen(true);

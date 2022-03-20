@@ -15,6 +15,7 @@ import { AuthContext } from "../../router/Router";
 import AlertMessage from "../../components/utils/AlertMessage";
 import { signIn } from "../../lib/api/auth";
 import { SignInParams } from "../../interfaces/index";
+import { useMessage } from "../../hooks/useMessage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -46,6 +47,7 @@ const SignIn: React.FC = () => {
   const history = useHistory();
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
+  const { showMessage } = useMessage();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -74,6 +76,7 @@ const SignIn: React.FC = () => {
 
         history.push("/");
 
+        showMessage({ title: "ログインしました", status: "success" });
         console.log("Signed in successfully!");
       } else {
         setAlertMessageOpen(true);
