@@ -15,7 +15,14 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import React, {
+  ChangeEvent,
+  memo,
+  useContext,
+  useEffect,
+  useState,
+  VFC,
+} from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { BsCamera } from "react-icons/bs";
 import {
@@ -30,6 +37,7 @@ import { useUpadate } from "../../hooks/useUpadate";
 import { User } from "../../interfaces/index";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
+import { AuthContext } from "../../router/Router";
 
 type Member = {
   id: string | undefined;
@@ -43,6 +51,7 @@ export const Edit: VFC = memo(() => {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef<HTMLButtonElement>(null);
+  const { setCurrentUser } = useContext(AuthContext);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -106,6 +115,7 @@ export const Edit: VFC = memo(() => {
       );
 
       setProfileImage(data.image.url);
+      setCurrentUser(data);
       setLoading(false);
       showMessage({ title: "アップロード完了", status: "success" });
 
