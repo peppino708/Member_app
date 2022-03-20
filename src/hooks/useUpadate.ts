@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { User } from "../interfaces/index";
+import { AuthContext } from "../router/Router";
 import { useMessage } from "./useMessage";
 
 export const useUpadate = () => {
   const { showMessage } = useMessage();
   const history = useHistory();
+  const { setCurrentUser } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
 
@@ -28,14 +30,15 @@ export const useUpadate = () => {
           hobbies: hobbies,
           recent_topic: recentTopic,
         })
-        .then(() => {
+        .then((res) => {
+          setCurrentUser(res.data);
           showMessage({ title: "更新しました", status: "success" });
           history.push("/home/user_management");
         })
         .catch(() => showMessage({ title: "更新できません", status: "error" }))
         .finally(() => setLoading(false));
     },
-    [history, showMessage]
+    [history, showMessage, setCurrentUser]
   );
   return { update, loading, setLoading };
 };
