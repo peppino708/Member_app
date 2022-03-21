@@ -38,6 +38,8 @@ import { User } from "../../interfaces/index";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { AuthContext } from "../../router/Router";
+import { signOut } from "../../lib/api/auth";
+import Cookies from "js-cookie";
 
 type Member = {
   id: string | undefined;
@@ -51,7 +53,7 @@ export const Edit: VFC = memo(() => {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef<HTMLButtonElement>(null);
-  const { setCurrentUser } = useContext(AuthContext);
+  const { setCurrentUser, setIsSignedIn } = useContext(AuthContext);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -131,12 +133,35 @@ export const Edit: VFC = memo(() => {
     history.push("/home/user_management");
   };
 
+  const handleSignOut = async () => {
+    try {
+      const res = await signOut();
+
+      if (res.data.success === true) {
+        // サインアウト時には各Cookieを削除
+        Cookies.remove("_access_token");
+        Cookies.remove("_client");
+        Cookies.remove("_uid");
+
+        setIsSignedIn(false);
+        history.push("/signin");
+
+        console.log("Succeeded in sign out");
+      } else {
+        console.log("Failed in sign out");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //Memberを削除する場合には先にsignoutする
   const onClickDelete = () => {
+    handleSignOut();
     axios
       .delete(`http://localhost:3000/api/v1/auth/members/${id}`)
       .then(() => {
         onClose();
-        history.push("/home/user_management");
         showMessage({ title: "削除しました", status: "success" });
       })
       .catch((e) => {
