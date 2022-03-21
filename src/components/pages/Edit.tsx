@@ -14,7 +14,6 @@ import {
   Image,
   Stack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import React, {
   ChangeEvent,
   memo,
@@ -38,6 +37,7 @@ import { User } from "../../interfaces/index";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { AuthContext } from "../../router/Router";
+import client from "../../lib/api/client";
 
 type Member = {
   id: string | undefined;
@@ -62,8 +62,8 @@ export const Edit: VFC = memo(() => {
   //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
   useEffect(() => {
     let isMounted = true;
-    axios
-      .get<User>(`http://localhost:3000/api/v1/auth/members/${id}`)
+    client
+      .get<User>(`auth/members/${id}`)
       .then((res) => {
         const member = res.data;
         if (isMounted) {
@@ -71,7 +71,7 @@ export const Edit: VFC = memo(() => {
           setNickname(member.nickname ?? "");
           setName(member.name ?? "");
           setHobbies(member.hobbies ?? "");
-          setRecentTopic(member.recent_topic ?? "");
+          setRecentTopic(member.recentTopic ?? "");
         }
       })
       .catch((e) => console.log(e));
@@ -108,8 +108,8 @@ export const Edit: VFC = memo(() => {
         },
       };
 
-      const { data } = await axios.patch(
-        `http://localhost:3000/api/v1/auth/members/${id}`,
+      const { data } = await client.patch(
+        `auth/members/${id}`,
         formData,
         config
       );
@@ -132,8 +132,8 @@ export const Edit: VFC = memo(() => {
   };
 
   const onClickDelete = () => {
-    axios
-      .delete(`http://localhost:3000/api/v1/auth/members/${id}`)
+    client
+      .delete(`/auth/members/${id}`)
       .then(() => {
         onClose();
         history.push("/home/user_management");

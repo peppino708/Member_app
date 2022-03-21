@@ -44,7 +44,7 @@ export const Home: React.FC = () => {
                 hobbies: {currentUser?.hobbies}
               </Text>
               <Text fontSize="lg" color="gray">
-                recentTopic: {currentUser?.recent_topic}
+                recentTopic: {currentUser?.recentTopic}
               </Text>
             </Stack>
           </Box>

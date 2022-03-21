@@ -24,7 +24,7 @@ export interface User {
     url: string;
   };
   hobbies: string;
-  recent_topic: string;
+  recentTopic: string;
   allowPasswordChange: boolean;
   created_at: Date;
   updated_at: Date;

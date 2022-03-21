@@ -38,7 +38,7 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
     setNickname(user?.nickname ?? "");
     setName(user?.name ?? "");
     setHobbies(user?.hobbies ?? "");
-    setRecentTopic(user?.recent_topic ?? "");
+    setRecentTopic(user?.recentTopic ?? "");
   }, [user]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
