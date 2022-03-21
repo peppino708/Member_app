@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
   const classes = useStyles();
   const histroy = useHistory();
 
-  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignOut = async () => {
     try {
       const res = await signOut();
 
@@ -150,7 +150,7 @@ export const Header: React.FC = () => {
       <Divider />
       <List>
         {["Signout"].map((text, index) => (
-          <ListItem button={true} key={text}>
+          <ListItem button={true} onClick={handleSignOut} key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <Inbox /> : <Mail />}
             </ListItemIcon>
