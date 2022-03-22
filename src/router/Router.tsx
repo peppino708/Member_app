@@ -44,9 +44,9 @@ export const Router: VFC = memo(() => {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
