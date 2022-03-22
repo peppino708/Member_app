@@ -23,13 +23,14 @@ export const AuthContext = createContext(
 );
 
 export const Router: VFC = memo(() => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
 
   // 認証済みのユーザーがいるかどうかチェック
   // 確認できた場合はそのユーザーの情報を取得
   const handleGetCurrentUser = async () => {
+    setLoading(true);
     try {
       const res = await getCurrentUser();
 
