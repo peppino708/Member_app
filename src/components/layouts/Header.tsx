@@ -182,7 +182,7 @@ export const Header: React.FC = () => {
           )}
           <Typography
             component={Link}
-            to="/"
+            to={isSignedIn ? "/" : "/signin"}
             variant="h6"
             className={classes.title}
           >
