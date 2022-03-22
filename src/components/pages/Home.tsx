@@ -12,6 +12,7 @@ export const Home: React.FC = () => {
 
   const onClickEdit = (id: number | undefined) =>
     history.push(`/home/${id}/edit`);
+  const onClickTweet = () => history.push(`/home/tweet`);
 
   return (
     <>
@@ -24,7 +25,7 @@ export const Home: React.FC = () => {
           ) : (
             <Box
               w={{ base: "260px", md: "500px" }}
-              h={"500px"}
+              h={"540px"}
               bg="white"
               borderRadius="10px"
               shadow="md"
@@ -59,9 +60,12 @@ export const Home: React.FC = () => {
                 </Text>
               </Stack>
               <Center>
-                <PrimaryButton onClick={() => onClickEdit(currentUser.id)}>
-                  Edit Profile
-                </PrimaryButton>
+                <Box mr={5}>
+                  <PrimaryButton onClick={() => onClickEdit(currentUser.id)}>
+                    Edit
+                  </PrimaryButton>
+                </Box>
+                <PrimaryButton onClick={onClickTweet}>Tweet</PrimaryButton>
               </Center>
             </Box>
           )}
