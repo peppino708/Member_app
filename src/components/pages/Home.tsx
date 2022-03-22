@@ -9,8 +9,6 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      {console.log(`isSignedIn: ${isSignedIn}`)}
-      {console.log(`currentUser: ${currentUser}`)}
       {isSignedIn && currentUser ? (
         <>
           {loading ? (
