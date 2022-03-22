@@ -9,6 +9,8 @@ export const Home: React.FC = () => {
 
   return (
     <>
+      {console.log(`isSignedIn: ${isSignedIn}`)}
+      {console.log(`currentUser: ${currentUser}`)}
       {isSignedIn && currentUser ? (
         <>
           {loading ? (
@@ -18,7 +20,7 @@ export const Home: React.FC = () => {
           ) : (
             <Box
               w={{ base: "260px", md: "500px" }}
-              h={{ base: "260px", md: "500px" }}
+              h={{ base: "400px", md: "500px" }}
               bg="white"
               borderRadius="10px"
               shadow="md"
