@@ -13,6 +13,7 @@ import {
   Flex,
   Heading,
   Image,
+  Spinner,
   Stack,
 } from "@chakra-ui/react";
 import React, {
@@ -59,8 +60,10 @@ export const Edit: VFC = memo(() => {
   const [hobbies, setHobbies] = useState("");
   const [recentTopic, setRecentTopic] = useState("");
   const [profileImage, setProfileImage] = useState<string>("");
+  const [loadingUser, setLoadingUser] = useState(false);
 
   const handleGetEditUser = async () => {
+    setLoadingUser(true);
     try {
       const res = await client.get<User>(`auth/members/${id}`);
 
@@ -73,6 +76,8 @@ export const Edit: VFC = memo(() => {
       setRecentTopic(member.recentTopic ?? "");
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingUser(false);
     }
   };
 
@@ -154,129 +159,135 @@ export const Edit: VFC = memo(() => {
 
   return (
     <>
-      <Flex align="center" justify="center" height="100vh" my={10}>
-        <Box bg="white" w="sm" p={4} borderRadius="md">
-          <Heading as="h2" size="lg" textAlign="center">
-            Edit Member
-          </Heading>
-          <Divider my={4} />
-          <Image
-            borderRadius="full"
-            boxSize="160px"
-            src={
-              profileImage
-                ? profileImage
-                : "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
-            }
-            alt={nickname}
-            mx="auto"
-            my={4}
-          />
-          <Center mb={4}>
-            <InputLabel htmlFor="profile-image">
-              <Input
-                id="profile-image"
-                type="file"
-                name="profile-image"
-                style={{ display: "none" }}
-                onChange={profileImageHandler}
-              />
-
-              <IconButton
-                style={{
-                  backgroundColor: "#f50057",
-                }}
-                component="span"
-              >
-                <BsCamera
-                  style={{
-                    color: "#fff",
-                  }}
+      {loadingUser ? (
+        <Center h="100vh">
+          <Spinner />
+        </Center>
+      ) : (
+        <Flex align="center" justify="center" height="100vh" mb={10}>
+          <Box bg="white" w="sm" p={4} borderRadius="md">
+            <Heading as="h2" size="lg" textAlign="center">
+              Edit Member
+            </Heading>
+            <Divider my={4} />
+            <Image
+              borderRadius="full"
+              boxSize="160px"
+              src={
+                profileImage
+                  ? profileImage
+                  : "https://res.cloudinary.com/dfw3mlaic/image/upload/v1/images/unknown_ffqtxf"
+              }
+              alt={nickname}
+              mx="auto"
+              my={4}
+            />
+            <Center mb={4}>
+              <InputLabel htmlFor="profile-image">
+                <Input
+                  id="profile-image"
+                  type="file"
+                  name="profile-image"
+                  style={{ display: "none" }}
+                  onChange={profileImageHandler}
                 />
-              </IconButton>
-            </InputLabel>
-          </Center>
-          <Stack spacing={4}>
-            <FormControl>
-              <TextField
-                autoFocus
-                label="名前"
-                variant="outlined"
-                value={name}
-                onChange={onChangeName}
-                // isReadOnly={!isAdmin}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="ニックネーム"
-                variant="outlined"
-                value={nickname}
-                onChange={onChangeNickname}
-                // isReadOnly={!isAdmin}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="趣味"
-                variant="outlined"
-                value={hobbies}
-                onChange={onChangeHobbies}
-                // isReadOnly={!isAdmin}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="最近のできごと"
-                variant="outlined"
-                value={recentTopic}
-                onChange={onChangeRecentTopic}
-                // isReadOnly={!isAdmin}
-              />
-            </FormControl>
-            <Divider my={4} />
-            <PrimaryButton onClick={onClickUpdate} loading={loading}>
-              更新
-            </PrimaryButton>
-            <Divider my={4} />
-            <Button
-              bg="red.400"
-              color="white"
-              _hover={{ opacity: 0.8 }}
-              isLoading={loading}
-              onClick={() => setIsOpen(true)}
-            >
-              削除
-            </Button>
-            <AlertDialog
-              isOpen={isOpen}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-            >
-              <AlertDialogOverlay>
-                <AlertDialogContent>
-                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete Member
-                  </AlertDialogHeader>
 
-                  <AlertDialogBody>
-                    Are you sure? You can't undo this action afterwards.
-                  </AlertDialogBody>
+                <IconButton
+                  style={{
+                    backgroundColor: "#f50057",
+                  }}
+                  component="span"
+                >
+                  <BsCamera
+                    style={{
+                      color: "#fff",
+                    }}
+                  />
+                </IconButton>
+              </InputLabel>
+            </Center>
+            <Stack spacing={4}>
+              <FormControl>
+                <TextField
+                  autoFocus
+                  label="名前"
+                  variant="outlined"
+                  value={name}
+                  onChange={onChangeName}
+                  // isReadOnly={!isAdmin}
+                />
+              </FormControl>
+              <FormControl>
+                <TextField
+                  label="ニックネーム"
+                  variant="outlined"
+                  value={nickname}
+                  onChange={onChangeNickname}
+                  // isReadOnly={!isAdmin}
+                />
+              </FormControl>
+              <FormControl>
+                <TextField
+                  label="趣味"
+                  variant="outlined"
+                  value={hobbies}
+                  onChange={onChangeHobbies}
+                  // isReadOnly={!isAdmin}
+                />
+              </FormControl>
+              <FormControl>
+                <TextField
+                  label="最近のできごと"
+                  variant="outlined"
+                  value={recentTopic}
+                  onChange={onChangeRecentTopic}
+                  // isReadOnly={!isAdmin}
+                />
+              </FormControl>
+              <Divider my={4} />
+              <PrimaryButton onClick={onClickUpdate} loading={loading}>
+                更新
+              </PrimaryButton>
+              <Divider my={4} />
+              <Button
+                bg="red.400"
+                color="white"
+                _hover={{ opacity: 0.8 }}
+                isLoading={loading}
+                onClick={() => setIsOpen(true)}
+              >
+                削除
+              </Button>
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete Member
+                    </AlertDialogHeader>
 
-                  <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onClose}>
-                      Cancel
-                    </Button>
-                    <Button colorScheme="red" onClick={onClickDelete} ml={3}>
-                      Delete
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
-          </Stack>
-        </Box>
-      </Flex>
+                    <AlertDialogBody>
+                      Are you sure? You can't undo this action afterwards.
+                    </AlertDialogBody>
+
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Cancel
+                      </Button>
+                      <Button colorScheme="red" onClick={onClickDelete} ml={3}>
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </Stack>
+          </Box>
+        </Flex>
+      )}
     </>
   );
 });
