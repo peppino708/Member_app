@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   AlertDialog,
   AlertDialogBody,
@@ -59,26 +60,32 @@ export const Edit: VFC = memo(() => {
   const [recentTopic, setRecentTopic] = useState("");
   const [profileImage, setProfileImage] = useState<string>("");
 
+  const handleGetEditUser = async () => {
+    try {
+      const res = await client.get<User>(`auth/members/${id}`);
+
+      const member = res.data;
+
+      setProfileImage(member.image.url ?? "");
+      setNickname(member.nickname ?? "");
+      setName(member.name ?? "");
+      setHobbies(member.hobbies ?? "");
+      setRecentTopic(member.recentTopic ?? "");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
   useEffect(() => {
     let isMounted = true;
-    client
-      .get<User>(`auth/members/${id}`)
-      .then((res) => {
-        const member = res.data;
-        if (isMounted) {
-          setProfileImage(member.image.url ?? "");
-          setNickname(member.nickname ?? "");
-          setName(member.name ?? "");
-          setHobbies(member.hobbies ?? "");
-          setRecentTopic(member.recentTopic ?? "");
-        }
-      })
-      .catch((e) => console.log(e));
+    if (isMounted) {
+      handleGetEditUser();
+    }
     return () => {
       isMounted = false;
     };
-  }, [id]);
+  }, []);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
     setNickname(e.target.value);
