@@ -16,7 +16,7 @@ import {
   Spinner,
   Stack,
 } from "@chakra-ui/react";
-import React, {
+import {
   ChangeEvent,
   memo,
   useContext,
@@ -51,11 +51,11 @@ export const Edit: VFC = memo(() => {
   const { update, loading, setLoading } = useUpdate();
   const { id } = useParams<Member>();
   const { showMessage } = useMessage();
-  const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
-  const { setCurrentUser } = useContext(AuthContext);
+  const { setCurrentUser, setIsSignedIn } = useContext(AuthContext);
 
+  const [isOpen, setIsOpen] = useState(false);
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
@@ -147,7 +147,8 @@ export const Edit: VFC = memo(() => {
       .delete(`/auth/members/${id}`)
       .then(() => {
         onClose();
-        history.push("/home/user_management");
+        setIsSignedIn(false);
+        history.push("/signin");
         showMessage({ title: "削除しました", status: "success" });
       })
       .catch((e) => {
