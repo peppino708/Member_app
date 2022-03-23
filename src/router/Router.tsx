@@ -22,8 +22,8 @@ export const AuthContext = createContext(
 );
 
 export const Router: VFC = memo(() => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
 
   // 認証済みのユーザーがいるかどうかチェック
@@ -49,21 +49,19 @@ export const Router: VFC = memo(() => {
 
   useEffect(() => {
     handleGetCurrentUser();
-  }, [setCurrentUser]);
+  }, []);
 
   // ユーザーが認証済みかどうかでルーティングを決定
   // 未認証だった場合は「/signin」ページに促す
   //リロードすると一瞬isSignedがfalseになるので、loadingが終わるまで判定を待つ
   const Private = ({ children }: { children: React.ReactElement }) => {
-    if (!loading) {
-      if (isSignedIn) {
-        return children;
-      } else {
-        return <Redirect to="/signin" />;
-      }
-    } else {
+    if (loading) {
       return <></>;
     }
+    if (isSignedIn) {
+      return children;
+    }
+    return <Redirect to="/signin" />;
   };
 
   return (

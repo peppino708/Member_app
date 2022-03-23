@@ -22,6 +22,7 @@ import React, {
   useContext,
   useEffect,
   useState,
+  useRef,
   VFC,
 } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -34,7 +35,7 @@ import {
 } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
 
-import { useUpadate } from "../../hooks/useUpadate";
+import { useUpdate } from "../../hooks/useUpdate";
 import { User } from "../../interfaces/index";
 import { useMessage } from "../../hooks/useMessage";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
@@ -47,19 +48,19 @@ type Member = {
 
 export const Edit: VFC = memo(() => {
   const history = useHistory();
-  const { update, loading, setLoading } = useUpadate();
+  const { update, loading, setLoading } = useUpdate();
   const { id } = useParams<Member>();
   const { showMessage } = useMessage();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef<HTMLButtonElement>(null);
+  const cancelRef = useRef<HTMLButtonElement>(null);
   const { setCurrentUser } = useContext(AuthContext);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [recentTopic, setRecentTopic] = useState("");
-  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImage, setProfileImage] = useState("");
   const [loadingUser, setLoadingUser] = useState(false);
 
   const handleGetEditUser = async () => {
@@ -101,9 +102,7 @@ export const Edit: VFC = memo(() => {
   const onChangeRecentTopic = (e: ChangeEvent<HTMLInputElement>) =>
     setRecentTopic(e.target.value);
 
-  const profileImageHandler = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const profileImageHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
     setLoading(true);

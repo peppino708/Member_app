@@ -30,8 +30,9 @@ export const getCurrentUser = () => {
     !Cookies.get("_access_token") ||
     !Cookies.get("_client") ||
     !Cookies.get("_uid")
-  )
+  ) {
     return;
+  }
   return client.get("/auth/sessions", {
     headers: {
       "access-token": Cookies.get("_access_token") || "",
