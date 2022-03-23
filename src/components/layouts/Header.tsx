@@ -124,7 +124,7 @@ export const Header: React.FC = () => {
         history.push("/home/tweet");
         break;
       case 2:
-        history.push("/");
+        history.push("/home");
         break;
       default:
         return;
@@ -182,7 +182,7 @@ export const Header: React.FC = () => {
           )}
           <Typography
             component={Link}
-            to={isSignedIn ? "/" : "/signin"}
+            to={isSignedIn ? "/home" : "/signin"}
             variant="h6"
             className={classes.title}
           >
