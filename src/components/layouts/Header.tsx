@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
@@ -10,8 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
-import { signOut } from "../../lib/api/auth";
 
 import { AuthContext } from "../../router/Router";
 import {
@@ -24,6 +21,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { Inbox, Mail } from "@material-ui/icons";
+import { useSignOut } from "../../hooks/useSignOut";
 
 const useStyles = makeStyles((theme: Theme) => ({
   iconButton: {
@@ -40,31 +38,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const Header: React.FC = () => {
-  const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext);
+  const { loading, isSignedIn } = useContext(AuthContext);
   const classes = useStyles();
-  const histroy = useHistory();
-
-  const handleSignOut = async () => {
-    try {
-      const res = await signOut();
-
-      if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
-        Cookies.remove("_access_token");
-        Cookies.remove("_client");
-        Cookies.remove("_uid");
-
-        setIsSignedIn(false);
-        histroy.push("/signin");
-
-        console.log("Succeeded in sign out");
-      } else {
-        console.log("Failed in sign out");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const history = useHistory();
+  const { handleSignOut } = useSignOut();
 
   const AuthButtons = () => {
     // 認証完了後はサインアウト用のボタンを表示
@@ -112,8 +89,6 @@ export const Header: React.FC = () => {
   const toggleDrawer = () => {
     setState(!state);
   };
-
-  const history = useHistory();
 
   const onClickHandler = (index: number) => {
     switch (index) {
