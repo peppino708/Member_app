@@ -16,6 +16,7 @@ export const Home: React.FC = () => {
 
   return (
     <>
+      {/* Router.tsxのPrivateでloadingがfalseになってからHomeがレンダリングされるようにしているので、Home側でloadingがtrueにならない→localStrageに保存？ */}
       {loading ? (
         <Center h="100vh">
           <Spinner />
