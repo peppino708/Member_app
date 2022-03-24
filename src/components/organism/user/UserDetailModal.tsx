@@ -20,7 +20,6 @@ type Props = {
   id: number | undefined;
   user: User | null;
   isOpen: boolean;
-  isAdmin?: boolean;
   onClose: () => void;
 };
 

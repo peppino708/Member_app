@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { memo, useCallback, useEffect, VFC } from "react";
 import { useAllUsers } from "../../hooks/useAllUsers";
-import { useLoginUser } from "../../hooks/useLoginUser";
 import { useSelectUser } from "../../hooks/useSelectUser";
 import { UserCard } from "../organism/user/UserCard";
 import { UserDetailModal } from "../organism/user/UserDetailModal";
@@ -17,7 +16,6 @@ export const UserManagement: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, loading, users } = useAllUsers();
   const { onSelectUser, selectedUser } = useSelectUser();
-  const { loginUser } = useLoginUser();
 
   //初回レンダリング時のみ実行
   useEffect(() => getUsers(), []);
@@ -59,7 +57,6 @@ export const UserManagement: VFC = memo(() => {
         id={selectedUser?.id}
         user={selectedUser}
         isOpen={isOpen}
-        isAdmin={loginUser?.isAdmin}
         onClose={onClose}
       />
     </>
