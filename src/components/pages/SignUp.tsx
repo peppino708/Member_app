@@ -71,7 +71,7 @@ const SignUp: React.FC = () => {
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
 
-        histroy.push("/home");
+        histroy.push("/home/user_management");
 
         showMessage({ title: "新規登録が完了しました", status: "success" });
         console.log("Signed in successfully!");
