@@ -2,7 +2,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { createContext, memo, useEffect, useState, VFC } from "react";
 import { homeRoutes } from "./HomeRoutes";
 import { Page404 } from "../Page404";
-import { LoginUserProvider } from "../providers/LoginUserProvider";
 import SignUp from "../components/pages/SignUp";
 import { User } from "../interfaces";
 import SignIn from "../components/pages/SignIn";
@@ -77,7 +76,7 @@ export const Router: VFC = memo(() => {
         }}
       >
         <CommonLayout>
-          <LoginUserProvider>
+          <>
             <Route path="/signin">
               <SignIn />
             </Route>
@@ -102,7 +101,7 @@ export const Router: VFC = memo(() => {
                 )}
               />
             </Private>
-          </LoginUserProvider>
+          </>
         </CommonLayout>
       </AuthContext.Provider>
       <Route path="*">
