@@ -1,4 +1,5 @@
-import { Box, Center, Image, Spinner, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Image, Spinner, Stack } from "@chakra-ui/react";
+import { FormControl, TextField } from "@material-ui/core";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -27,7 +28,7 @@ export const Home: React.FC = () => {
             <>
               <Box
                 w={{ base: "260px", md: "500px" }}
-                h={"540px"}
+                h={{ base: "450px", md: "520px" }}
                 bg="white"
                 borderRadius="10px"
                 shadow="md"
@@ -36,7 +37,7 @@ export const Home: React.FC = () => {
               >
                 <Image
                   borderRadius="full"
-                  boxSize={{ base: "160px", md: "250px" }}
+                  boxSize={{ base: "160px", md: "220px" }}
                   src={
                     currentUser.image.url
                       ? currentUser.image.url
@@ -44,22 +45,51 @@ export const Home: React.FC = () => {
                   }
                   m="auto"
                 />
-                <Stack textAlign={"center"} my={3}>
-                  <Text fontSize="lg" color="gray">
-                    Email: {currentUser?.email}
-                  </Text>
-                  <Text fontSize="lg" color="gray">
-                    Name: {currentUser?.name}
-                  </Text>
-                  <Text fontSize="lg" color="gray">
-                    nickname: {currentUser?.nickname}
-                  </Text>
-                  <Text fontSize="lg" color="gray">
-                    hobbies: {currentUser?.hobbies}
-                  </Text>
-                  <Text fontSize="lg" color="gray">
-                    recentTopic: {currentUser?.recentTopic}
-                  </Text>
+                <Stack align={"center"} my={4}>
+                  <FormControl>
+                    <TextField
+                      style={{ width: 250 }}
+                      size="small"
+                      margin="none"
+                      label="名前"
+                      variant="outlined"
+                      value={currentUser.name}
+                      inputProps={{ readOnly: true }}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextField
+                      style={{ width: 250 }}
+                      size="small"
+                      margin="none"
+                      label="ニックネーム"
+                      variant="outlined"
+                      value={currentUser.nickname}
+                      inputProps={{ readOnly: true }}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextField
+                      style={{ width: 250 }}
+                      size="small"
+                      margin="none"
+                      label="趣味"
+                      variant="outlined"
+                      value={currentUser.hobbies}
+                      inputProps={{ readOnly: true }}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextField
+                      style={{ width: 250 }}
+                      size="small"
+                      margin="none"
+                      label="最近のできごと"
+                      variant="outlined"
+                      value={currentUser.recentTopic}
+                      inputProps={{ readOnly: true }}
+                    />
+                  </FormControl>
                 </Stack>
                 <Center>
                   <Box mr={5}>
