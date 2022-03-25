@@ -1,4 +1,12 @@
-import { Box, Center, Image, Spinner, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Divider,
+  Heading,
+  Image,
+  Spinner,
+  Stack,
+} from "@chakra-ui/react";
 import { FormControl, TextField } from "@material-ui/core";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -27,14 +35,18 @@ export const Home: React.FC = () => {
           {isSignedIn && currentUser ? (
             <>
               <Box
-                w={{ base: "260px", md: "500px" }}
-                h={{ base: "450px", md: "520px" }}
+                w={{ base: "300px", md: "500px" }}
+                h={{ base: "520px", md: "580px" }}
                 bg="white"
                 borderRadius="10px"
                 shadow="md"
                 p={4}
                 overflow={"auto"}
               >
+                <Heading as="h2" size="lg" textAlign="center">
+                  Mypage
+                </Heading>
+                <Divider my={4} />
                 <Image
                   borderRadius="full"
                   boxSize={{ base: "160px", md: "220px" }}
