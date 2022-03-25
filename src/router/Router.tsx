@@ -7,6 +7,7 @@ import { User } from "../interfaces";
 import SignIn from "../components/pages/SignIn";
 import { getCurrentUser } from "../lib/api/auth";
 import CommonLayout from "../components/layouts/CommonLayout";
+import { Center, Spinner } from "@chakra-ui/react";
 
 // グローバルで扱う変数・関数
 export const AuthContext = createContext(
@@ -55,7 +56,13 @@ export const Router: VFC = memo(() => {
   //リロードすると一瞬isSignedがfalseになるので、loadingが終わるまで判定を待つ
   const Private = ({ children }: { children: React.ReactElement }) => {
     if (loading) {
-      return <></>;
+      return (
+        <>
+          <Center h="100vh">
+            <Spinner />
+          </Center>
+        </>
+      );
     }
     if (isSignedIn) {
       return children;
