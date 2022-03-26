@@ -74,7 +74,7 @@ const SignIn: React.FC = () => {
         setIsSignedIn(true);
         setCurrentUser(res.data.data);
 
-        history.push("/home/user_management");
+        history.push("/home");
 
         showMessage({ title: "ログインしました", status: "success" });
         console.log("Signed in successfully!");
