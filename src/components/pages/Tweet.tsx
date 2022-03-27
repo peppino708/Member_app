@@ -1,5 +1,6 @@
-import { Box, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Wrap } from "@chakra-ui/react";
 import { memo, VFC } from "react";
+import { Post } from "../organism/tweet/Post";
 import { TweetInput } from "../organism/tweet/TweetInput";
 
 const textArr = [
@@ -20,27 +21,9 @@ export const Tweet: VFC = memo(() => {
     <>
       <TweetInput />
       <Wrap p={{ base: 4, md: 10 }} justify="space-around">
-        {textArr.map((text, i) => {
-          return (
-            <WrapItem key={i}>
-              <Box
-                w="260px"
-                h="260px"
-                bg="white"
-                borderRadius="10px"
-                shadow="md"
-                p={4}
-                _hover={{ opacity: 0.8, cursor: "pointer" }}
-                // onClick={() => onClick(id)}
-                overflow={"auto"}
-              >
-                <Text fontSize="2xl" color="gray.700" p={2} m={2}>
-                  {text}
-                </Text>
-              </Box>
-            </WrapItem>
-          );
-        })}
+        {textArr.map((text, i) => (
+          <Post key={i} text={text} />
+        ))}
       </Wrap>
     </>
   );
