@@ -20,7 +20,7 @@ export const TweetInput = () => {
   return (
     <>
       <form onSubmit={sendTweet}>
-        <Box display={"flex"}>
+        <Box display={"flex"} px={{ base: 4, md: 8 }}>
           <TextField
             style={{ marginRight: 20 }}
             variant="outlined"
