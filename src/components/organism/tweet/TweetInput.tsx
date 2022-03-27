@@ -1,7 +1,11 @@
 import { Box, Button, TextField, Theme } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
-import React, { useState } from "react";
+import { useContext, useState } from "react";
+import { useMessage } from "../../../hooks/useMessage";
+import { Post } from "../../../interfaces";
+import client from "../../../lib/api/client";
+import { AuthContext } from "../../../router/Router";
 
 const useStyle = makeStyles((theme: Theme) => ({
   textField: {
@@ -11,9 +15,23 @@ const useStyle = makeStyles((theme: Theme) => ({
 
 export const TweetInput = () => {
   const classes = useStyle();
+  const { currentUser } = useContext(AuthContext);
+  const { showMessage } = useMessage();
+
   const [tweetMsg, setTweetMsg] = useState("");
 
   const sendTweet = () => {
+    client
+      .post<Post>("auth/posts/", {
+        content: tweetMsg,
+        userId: currentUser?.id,
+      })
+      .then(() => {
+        showMessage({ title: "ツイートしました", status: "success" });
+      })
+      .catch(() =>
+        showMessage({ title: "ツイートできません", status: "error" })
+      );
     setTweetMsg("");
   };
 
