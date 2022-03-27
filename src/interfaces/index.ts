@@ -29,3 +29,9 @@ export interface User {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface Post {
+  id: number;
+  content: string;
+  userId: number;
+}

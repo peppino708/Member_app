@@ -2,11 +2,11 @@ import { Box, Text, WrapItem } from "@chakra-ui/react";
 import React, { VFC } from "react";
 
 interface Props {
-  text: string;
+  post: string;
 }
 
 export const Post: VFC<Props> = (props) => {
-  const { text } = props;
+  const { post } = props;
   return (
     <WrapItem>
       <Box
@@ -21,7 +21,7 @@ export const Post: VFC<Props> = (props) => {
         overflow={"auto"}
       >
         <Text fontSize="2xl" color="gray.700" p={2} m={2}>
-          {text}
+          {post}
         </Text>
       </Box>
     </WrapItem>
