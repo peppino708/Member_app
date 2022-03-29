@@ -1,16 +1,19 @@
 import { Box, Button, Text, WrapItem } from "@chakra-ui/react";
 import { Edit } from "@material-ui/icons";
-import { VFC } from "react";
+import { useContext, VFC } from "react";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../../router/Router";
 
 interface Props {
   post: string;
   id: number;
+  userId: number;
 }
 
 export const TweetPost: VFC<Props> = (props) => {
-  const { post, id } = props;
+  const { post, id, userId } = props;
   const history = useHistory();
+  const { currentUser } = useContext(AuthContext);
 
   const onClickEdit = () => history.push(`/home/${id}/tweet_edit`);
 
@@ -30,9 +33,11 @@ export const TweetPost: VFC<Props> = (props) => {
         <Text fontSize="2xl" color="gray.700" p={2} m={2}>
           {post}
         </Text>
-        <Button onClick={onClickEdit}>
-          <Edit />
-        </Button>
+        {currentUser?.id === userId && (
+          <Button onClick={onClickEdit}>
+            <Edit />
+          </Button>
+        )}
       </Box>
     </WrapItem>
   );

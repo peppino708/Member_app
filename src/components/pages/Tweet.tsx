@@ -21,7 +21,12 @@ export const Tweet: VFC = memo(() => {
           <TweetInput />
           <Wrap p={{ base: 4, md: 10 }} justify="space-around">
             {posts.map((post) => (
-              <TweetPost key={post.id} post={post.content} id={post.id} />
+              <TweetPost
+                key={post.id}
+                post={post.content}
+                id={post.id}
+                userId={post.userId}
+              />
             ))}
           </Wrap>
         </>
