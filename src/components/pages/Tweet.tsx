@@ -2,7 +2,7 @@
 import { Center, Spinner, Wrap } from "@chakra-ui/react";
 import { memo, useEffect, VFC } from "react";
 import { useAllPosts } from "../../hooks/useAllPosts";
-import { Post } from "../organism/tweet/Post";
+import { TweetPost } from "../organism/tweet/TweetPost";
 import { TweetInput } from "../organism/tweet/TweetInput";
 
 export const Tweet: VFC = memo(() => {
@@ -21,7 +21,7 @@ export const Tweet: VFC = memo(() => {
           <TweetInput />
           <Wrap p={{ base: 4, md: 10 }} justify="space-around">
             {posts.map((post) => (
-              <Post key={post.id} post={post.content} id={post.id} />
+              <TweetPost key={post.id} post={post.content} id={post.id} />
             ))}
           </Wrap>
         </>

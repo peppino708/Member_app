@@ -9,7 +9,7 @@ interface Props {
   id: number;
 }
 
-export const Post: VFC<Props> = (props) => {
+export const TweetPost: VFC<Props> = (props) => {
   const { post, id } = props;
   const { showMessage } = useMessage();
 
