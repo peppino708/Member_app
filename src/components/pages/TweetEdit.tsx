@@ -1,5 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
-import { Button } from "@material-ui/core";
+import { Box } from "@chakra-ui/react";
+import { Button, TextField } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -64,9 +64,15 @@ export const TweetEdit = () => {
       // onClick={() => onClick(id)}
       overflow={"auto"}
     >
-      <Text fontSize="2xl" color="gray.700" p={2} m={2}>
-        {tweetContent}
-      </Text>
+      <TextField
+        id="outlined-multiline-static"
+        label="Edit Post"
+        multiline
+        fullWidth
+        rows={8}
+        value={tweetContent}
+        variant="outlined"
+      />
       <Button onClick={onClickDelete}>
         <Delete />
       </Button>
