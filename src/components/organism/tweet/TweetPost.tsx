@@ -1,8 +1,7 @@
 import { Box, Button, Text, WrapItem } from "@chakra-ui/react";
-import { Delete } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 import { VFC } from "react";
-import { useMessage } from "../../../hooks/useMessage";
-import client from "../../../lib/api/client";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   post: string;
@@ -11,20 +10,9 @@ interface Props {
 
 export const TweetPost: VFC<Props> = (props) => {
   const { post, id } = props;
-  const { showMessage } = useMessage();
+  const history = useHistory();
 
-  const onClickDelete = () => {
-    client
-      .delete(`/auth/posts/${id}`)
-      .then(() => {
-        // onClose();
-        showMessage({ title: "削除しました", status: "success" });
-      })
-      .catch((e) => {
-        console.log(e);
-        showMessage({ title: "削除できません", status: "error" });
-      });
-  };
+  const onClickEdit = () => history.push(`/home/${id}/tweet_edit`);
 
   return (
     <WrapItem>
@@ -42,8 +30,8 @@ export const TweetPost: VFC<Props> = (props) => {
         <Text fontSize="2xl" color="gray.700" p={2} m={2}>
           {post}
         </Text>
-        <Button onClick={onClickDelete}>
-          <Delete />
+        <Button onClick={onClickEdit}>
+          <Edit />
         </Button>
       </Box>
     </WrapItem>
