@@ -65,7 +65,6 @@ export const TweetEdit = () => {
       overflow={"auto"}
     >
       <TextField
-        id="outlined-multiline-static"
         label="Edit Post"
         multiline
         fullWidth
