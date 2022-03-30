@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Button, TextField } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
+import { Delete, Send } from "@material-ui/icons";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
@@ -37,6 +37,8 @@ export const TweetEdit = () => {
   useEffect(() => {
     handleGetEditPost();
   }, [handleGetEditPost]);
+
+  const onClickUpdate = () => {};
 
   const onClickDelete = () => {
     client
@@ -75,9 +77,14 @@ export const TweetEdit = () => {
           setTweetContent(e.target.value)
         }
       />
-      <Button onClick={onClickDelete}>
-        <Delete />
-      </Button>
+      <Box display="flex" justifyContent="space-between" marginTop={2}>
+        <Button onClick={onClickDelete}>
+          <Delete />
+        </Button>
+        <Button onClick={onClickUpdate}>
+          <Send />
+        </Button>
+      </Box>
     </Box>
   );
 };
