@@ -60,8 +60,8 @@ export const TweetEdit = () => {
 
   return (
     <Box
-      w="260px"
-      h="260px"
+      w="270px"
+      h="270px"
       bg="white"
       borderRadius="10px"
       shadow="md"
