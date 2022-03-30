@@ -139,7 +139,6 @@ export const Edit: VFC = memo(() => {
 
   const onClickUpdate = () => {
     update(id, name, nickname, hobbies, recentTopic);
-    history.push("/home/user_management");
   };
 
   const onClickDelete = () => {
