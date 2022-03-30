@@ -4,6 +4,7 @@ import { Delete, Send } from "@material-ui/icons";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
+import { useUpdatePost } from "../../hooks/useUpdatePost";
 import { Post } from "../../interfaces";
 import client from "../../lib/api/client";
 
@@ -18,6 +19,7 @@ export const TweetEdit = () => {
   const { id } = useParams<EditPost>();
   const history = useHistory();
   const { showMessage } = useMessage();
+  const { updatePost } = useUpdatePost();
 
   const handleGetEditPost = useCallback(async () => {
     // setLoadingPost(true);
@@ -38,7 +40,9 @@ export const TweetEdit = () => {
     handleGetEditPost();
   }, [handleGetEditPost]);
 
-  const onClickUpdate = () => {};
+  const onClickUpdate = () => {
+    updatePost(id, tweetContent);
+  };
 
   const onClickDelete = () => {
     client
