@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   AlertDialog,
   AlertDialogBody,
@@ -24,6 +23,7 @@ import {
   useState,
   useRef,
   VFC,
+  useCallback,
 } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { BsCamera } from "react-icons/bs";
@@ -63,7 +63,7 @@ export const Edit: VFC = memo(() => {
   const [profileImage, setProfileImage] = useState("");
   const [loadingUser, setLoadingUser] = useState(false);
 
-  const handleGetEditUser = async () => {
+  const handleGetEditUser = useCallback(async () => {
     setLoadingUser(true);
     try {
       const res = await client.get<User>(`auth/members/${id}`);
@@ -80,7 +80,7 @@ export const Edit: VFC = memo(() => {
     } finally {
       setLoadingUser(false);
     }
-  };
+  }, [id]);
 
   //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
   useEffect(() => {
@@ -91,7 +91,7 @@ export const Edit: VFC = memo(() => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [handleGetEditUser]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
     setNickname(e.target.value);

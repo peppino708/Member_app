@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Button, TextField } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 import { Post } from "../../interfaces";
@@ -19,7 +19,7 @@ export const TweetEdit = () => {
   const history = useHistory();
   const { showMessage } = useMessage();
 
-  const handleGetEditPost = async () => {
+  const handleGetEditPost = useCallback(async () => {
     // setLoadingPost(true);
     try {
       const res = await client.get<Post>(`auth/posts/${id}`);
@@ -32,11 +32,11 @@ export const TweetEdit = () => {
     } finally {
       // setLoadingPost(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     handleGetEditPost();
-  });
+  }, [handleGetEditPost]);
 
   const onClickDelete = () => {
     client
@@ -71,6 +71,9 @@ export const TweetEdit = () => {
         rows={8}
         value={tweetContent}
         variant="outlined"
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setTweetContent(e.target.value)
+        }
       />
       <Button onClick={onClickDelete}>
         <Delete />
