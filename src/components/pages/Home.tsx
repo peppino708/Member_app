@@ -22,6 +22,7 @@ export const Home: React.FC = () => {
   const onClickEdit = (id: number | undefined) =>
     history.push(`/home/${id}/edit`);
   const onClickTweet = () => history.push(`/home/tweet`);
+  const onClickMember = () => history.push("/home/user_management");
 
   return (
     <>
@@ -109,7 +110,10 @@ export const Home: React.FC = () => {
                       Edit
                     </PrimaryButton>
                   </Box>
-                  <PrimaryButton onClick={onClickTweet}>Tweet</PrimaryButton>
+                  <Box mr={5}>
+                    <PrimaryButton onClick={onClickTweet}>Tweet</PrimaryButton>
+                  </Box>
+                  <PrimaryButton onClick={onClickMember}>Member</PrimaryButton>
                 </Center>
               </Box>
             </>
