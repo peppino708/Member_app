@@ -49,6 +49,7 @@ export const Home: React.FC = () => {
                 </Heading>
                 <Divider my={4} />
                 <Image
+                  objectFit={"cover"}
                   borderRadius="full"
                   boxSize={{ base: "160px", md: "220px" }}
                   src={

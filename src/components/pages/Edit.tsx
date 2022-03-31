@@ -170,6 +170,7 @@ export const Edit: VFC = memo(() => {
             </Heading>
             <Divider my={4} />
             <Image
+              objectFit={"cover"}
               borderRadius="full"
               boxSize="160px"
               src={
