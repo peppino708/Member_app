@@ -1,4 +1,6 @@
 import {
+  Divider,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,16 +15,17 @@ import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
 import { Post } from "../../../interfaces/index";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
-import { FormControl, TextField } from "@material-ui/core";
+import { Box, Button, FormControl, TextField } from "@material-ui/core";
 import { AuthContext } from "../../../router/Router";
+import { Send } from "@material-ui/icons";
 
 //idバケツリレーになってしまっている？globalなstateで管理する?
-type Props = {
+interface Props {
   id: number | undefined;
   post: Post | null;
   isOpen: boolean;
   onClose: () => void;
-};
+}
 
 export const TweetCommentModal: VFC<Props> = memo((props) => {
   const { post, isOpen, onClose, id = undefined } = props;
@@ -42,59 +45,46 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent pb={2}>
-        <ModalHeader>Tweet</ModalHeader>
+        <ModalHeader>Tweet Modal</ModalHeader>
         <ModalCloseButton />
         <ModalBody mx={4}>
           <Stack spacing={4}>
-            <Text>{tweetContent}</Text>
-            {/* <FormControl>
-              <TextField
-                margin="normal"
-                label="名前"
-                variant="outlined"
-                value={name}
-                onChange={onChangeName}
-                inputProps={{ readOnly: true }}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                margin="normal"
-                label="ニックネーム"
-                variant="outlined"
-                value={nickname}
-                onChange={onChangeNickname}
-                inputProps={{ readOnly: true }}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                margin="normal"
-                label="趣味"
-                variant="outlined"
-                value={hobbies}
-                onChange={onChangeHobbies}
-                inputProps={{ readOnly: true }}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                margin="normal"
-                label="最近のできごと"
-                variant="outlined"
-                value={recentTopic}
-                onChange={onChangeRecentImage}
-                inputProps={{ readOnly: true }}
-              />
-            </FormControl> */}
+            <Heading as="h5" size="sm">
+              Tweet
+            </Heading>
+            <Text fontSize="xl">{tweetContent}</Text>
+            <Divider />
+            <Heading as="h5" size="sm">
+              Comment
+            </Heading>
+            <Text fontSize="xl">ねむこちゃんです！</Text>
+            <Divider />
           </Stack>
         </ModalBody>
-        {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
-        {currentUser?.id === id && (
-          <ModalFooter>
-            {/* <PrimaryButton onClick={() => onClickEdit(id)}>編集</PrimaryButton> */}
-          </ModalFooter>
-        )}
+        <ModalFooter>
+          {/* <form onSubmit={sendTweet}> */}
+          <Box display={"flex"} px={{ base: 4, md: 8 }}>
+            <TextField
+              style={{ marginRight: 20 }}
+              variant="outlined"
+              fullWidth
+              label="Add comments?"
+              // className={classes.textField}
+              // value={tweetMsg}
+              // onChange={(e) => setTweetMsg(e.target.value)}
+            />
+            <Button
+              type="submit"
+              // disabled={!tweetMsg}
+              style={{ borderRadius: "100%" }}
+              variant="contained"
+              color="primary"
+            >
+              <Send />
+            </Button>
+          </Box>
+          {/* </form> */}
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
