@@ -8,10 +8,11 @@ interface Props {
   post: string;
   id: number;
   userId: number;
+  onClick: (id: number) => void;
 }
 
 export const TweetPost: VFC<Props> = (props) => {
-  const { post, id, userId } = props;
+  const { post, id, userId, onClick } = props;
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
 
@@ -27,7 +28,7 @@ export const TweetPost: VFC<Props> = (props) => {
         shadow="md"
         p={4}
         _hover={{ opacity: 0.8, cursor: "pointer" }}
-        // onClick={() => onClick(id)}
+        onClick={() => onClick(id)}
         overflow={"auto"}
       >
         <Text fontSize="2xl" color="gray.700" p={2} m={2}>
