@@ -11,12 +11,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
-import { useHistory } from "react-router-dom";
+import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
 import { Post } from "../../../interfaces/index";
-import { PrimaryButton } from "../../atoms/button/PrimaryButton";
-import { Box, Button, FormControl, TextField } from "@material-ui/core";
-import { AuthContext } from "../../../router/Router";
+import { Box, Button, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 
 //idバケツリレーになってしまっている？globalなstateで管理する?
@@ -27,12 +24,26 @@ interface Props {
   onClose: () => void;
 }
 
+// interface COMMENT {
+//   id: string;
+//   text: string;
+//   timestamp: any;
+// }
+
 export const TweetCommentModal: VFC<Props> = memo((props) => {
   const { post, isOpen, onClose, id = undefined } = props;
-  const history = useHistory();
-  const { currentUser } = useContext(AuthContext);
+  // const history = useHistory();
+  // const { currentUser } = useContext(AuthContext);
 
   const [tweetContent, setTweetContent] = useState("");
+  const [comment, setComment] = useState("");
+  // const [comments, setComments] = useState<COMMENT[]>([
+  //   {
+  //     id: "",
+  //     text: "",
+  //     timestamp: null,
+  //   },
+  // ]);
 
   useEffect(() => {
     setTweetContent(post?.content ?? "");
@@ -70,12 +81,14 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
               fullWidth
               label="Add comments?"
               // className={classes.textField}
-              // value={tweetMsg}
-              // onChange={(e) => setTweetMsg(e.target.value)}
+              value={comment}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setComment(e.target.value)
+              }
             />
             <Button
               type="submit"
-              // disabled={!tweetMsg}
+              disabled={!comment}
               style={{ borderRadius: "100%" }}
               variant="contained"
               color="primary"
