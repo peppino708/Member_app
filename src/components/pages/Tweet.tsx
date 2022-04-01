@@ -44,7 +44,7 @@ export const Tweet: VFC = memo(() => {
         </>
       )}
       <TweetCommentModal
-        id={selectedTweet?.id}
+        tweetId={selectedTweet?.id}
         post={selectedTweet}
         isOpen={isOpen}
         onClose={onClose}
