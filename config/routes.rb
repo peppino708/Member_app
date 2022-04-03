@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       namespace :auth do
         resources :sessions, only: %i[index]
         resources :members
-        resources :posts
+        resources :posts do
+          resources :comments
+        end
       end
     end
   end
