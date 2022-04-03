@@ -35,3 +35,10 @@ export interface Post {
   content: string;
   userId: number;
 }
+
+export interface Comment {
+  id: number;
+  content: string;
+  userId: number;
+  postId: number;
+}
