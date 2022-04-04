@@ -13,10 +13,13 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
 import { Comment, Post } from "../../../interfaces/index";
 import { Box, Button, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
+import client from "../../../lib/api/client";
+import { AuthContext } from "../../../router/Router";
+import { useMessage } from "../../../hooks/useMessage";
 
 interface Props {
   comments: Comment[] | null;
@@ -29,7 +32,8 @@ interface Props {
 export const TweetCommentModal: VFC<Props> = memo((props) => {
   const { post, isOpen, onClose, comments, loading } = props;
   // const history = useHistory();
-  // const { currentUser } = useContext(AuthContext);
+  const { showMessage } = useMessage();
+  const { currentUser } = useContext(AuthContext);
 
   const [tweetContent, setTweetContent] = useState("");
   const [comment, setComment] = useState("");
@@ -38,7 +42,20 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
     setTweetContent(post?.content ?? "");
   }, [post]);
 
-  const sendComment = () => {};
+  const sendComment = () => {
+    client
+      .post<Comment>(`auth/posts/${post?.id}/comments`, {
+        content: comment,
+        userId: currentUser?.id,
+      })
+      .then(() => {
+        showMessage({ title: "コメントしました", status: "success" });
+      })
+      .catch(() =>
+        showMessage({ title: "コメントできません", status: "error" })
+      );
+    setComment("");
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
@@ -78,7 +95,7 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
                 style={{ marginRight: 20 }}
                 variant="outlined"
                 fullWidth
-                label="Add comments?"
+                label="Add new comments?"
                 value={comment}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setComment(e.target.value)
