@@ -1,4 +1,5 @@
 import {
+  Center,
   Divider,
   Heading,
   Modal,
@@ -8,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -21,10 +23,11 @@ interface Props {
   post: Post | null;
   isOpen: boolean;
   onClose: () => void;
+  loading: boolean;
 }
 
 export const TweetCommentModal: VFC<Props> = memo((props) => {
-  const { post, isOpen, onClose, comments } = props;
+  const { post, isOpen, onClose, comments, loading } = props;
   // const history = useHistory();
   // const { currentUser } = useContext(AuthContext);
 
@@ -53,12 +56,18 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
             <Heading as="h5" size="sm">
               Comment
             </Heading>
-            {comments &&
+            {loading ? (
+              <Center>
+                <Spinner />
+              </Center>
+            ) : (
+              comments &&
               comments.map((comment) => (
                 <Text fontSize="xl" key={comment.id}>
                   {comment.content}
                 </Text>
-              ))}
+              ))
+            )}
             <Divider />
           </Stack>
         </ModalBody>

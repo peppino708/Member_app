@@ -12,22 +12,26 @@ type Props = {
 export const useSelectTweet = () => {
   const [selectedTweet, setSelectedTweet] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[] | null>([]);
-  // const [loadingComments, setLoadingComments] = useState(false);
+  const [loadingComments, setLoadingComments] = useState(false);
 
   const onSelectTweet = useCallback((props: Props) => {
     const { posts, id, onOpen } = props;
     const targetTweet = posts.find((post) => post.id === id);
     setSelectedTweet(targetTweet!); //!:undefinedの可能性がないよと伝えている
-    client
-      .get<Array<Comment>>(`auth/posts/${id}/comments`)
-      .then((res) => setComments(res.data))
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // setLoading(false);
-      });
+    const getComments = () => {
+      setLoadingComments(true);
+      client
+        .get<Array<Comment>>(`auth/posts/${id}/comments`)
+        .then((res) => setComments(res.data))
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoadingComments(false);
+        });
+    };
+    getComments();
     onOpen();
   }, []);
-  return { onSelectTweet, selectedTweet, comments };
+  return { onSelectTweet, selectedTweet, comments, loadingComments };
 };
