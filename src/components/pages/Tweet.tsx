@@ -10,7 +10,7 @@ import { TweetCommentModal } from "../organism/tweet/TweetCommentModal";
 export const Tweet: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getPosts, loading, posts } = useAllPosts();
-  const { selectedTweet, onSelectTweet } = useSelectTweet();
+  const { selectedTweet, onSelectTweet, comments } = useSelectTweet();
 
   useEffect(() => getPosts(), []);
 
@@ -44,7 +44,7 @@ export const Tweet: VFC = memo(() => {
         </>
       )}
       <TweetCommentModal
-        tweetId={selectedTweet?.id}
+        comments={comments}
         post={selectedTweet}
         isOpen={isOpen}
         onClose={onClose}

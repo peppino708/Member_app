@@ -12,38 +12,28 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
-import { Post } from "../../../interfaces/index";
+import { Comment, Post } from "../../../interfaces/index";
 import { Box, Button, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 
 interface Props {
-  tweetId: number | undefined;
+  comments: Comment[] | null;
   post: Post | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface COMMENT {
-  id: number;
-  text: string;
-  userId: number;
-}
-
 export const TweetCommentModal: VFC<Props> = memo((props) => {
-  const { post, isOpen, onClose, tweetId = undefined } = props;
+  const { post, isOpen, onClose, comments } = props;
   // const history = useHistory();
   // const { currentUser } = useContext(AuthContext);
 
   const [tweetContent, setTweetContent] = useState("");
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState<COMMENT[]>([]);
 
   useEffect(() => {
     setTweetContent(post?.content ?? "");
   }, [post]);
-
-  // const onClickEdit = (id: number | undefined) =>
-  //   history.push(`/home/${id}/edit`);
 
   const sendComment = () => {};
 
@@ -63,7 +53,12 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
             <Heading as="h5" size="sm">
               Comment
             </Heading>
-            <Text fontSize="xl">ねむこちゃんです！</Text>
+            {comments &&
+              comments.map((comment) => (
+                <Text fontSize="xl" key={comment.id}>
+                  {comment.content}
+                </Text>
+              ))}
             <Divider />
           </Stack>
         </ModalBody>
