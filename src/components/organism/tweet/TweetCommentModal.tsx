@@ -16,7 +16,7 @@ import {
 import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
 import { Comment, Post } from "../../../interfaces/index";
 import { Box, Button, TextField } from "@material-ui/core";
-import { Send } from "@material-ui/icons";
+import { Delete, Send } from "@material-ui/icons";
 import client from "../../../lib/api/client";
 import { AuthContext } from "../../../router/Router";
 import { useMessage } from "../../../hooks/useMessage";
@@ -57,6 +57,19 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
     setComment("");
   };
 
+  const onClickDeleteComment = (commentId: number) => {
+    client
+      .delete(`/auth/posts/${post?.id}/comments/${commentId}`)
+      .then(() => {
+        showMessage({ title: "削除しました", status: "success" });
+        onClose();
+      })
+      .catch((e) => {
+        console.log(e);
+        showMessage({ title: "削除できません", status: "error" });
+      });
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
@@ -80,9 +93,16 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
             ) : (
               comments &&
               comments.map((comment) => (
-                <Text fontSize="xl" key={comment.id}>
-                  {comment.content}
-                </Text>
+                <Box display="flex">
+                  <Text fontSize="xl" key={comment.id}>
+                    {comment.content}
+                  </Text>
+                  {currentUser?.id === comment.userId && (
+                    <Button onClick={() => onClickDeleteComment(comment.id)}>
+                      <Delete />
+                    </Button>
+                  )}
+                </Box>
               ))
             )}
             <Divider />
