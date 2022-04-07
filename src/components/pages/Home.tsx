@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../router/Router";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
-// とりあえず認証済みユーザーの名前やメールアドレスを表示
 export const Home: React.FC = () => {
   const { isSignedIn, currentUser, loading } = useContext(AuthContext);
   const history = useHistory();
@@ -26,7 +25,6 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      {/* Router.tsxのPrivateでloadingがfalseになってからHomeがレンダリングされるようにしているので、Home側でloadingがtrueにならない→localStrageに保存？ */}
       {loading ? (
         <Center h="100vh">
           <Spinner />

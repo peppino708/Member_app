@@ -128,8 +128,6 @@ export const Edit: VFC = memo(() => {
       setCurrentUser(data);
       setLoading(false);
       showMessage({ title: "アップロード完了", status: "success" });
-
-      // dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
       showMessage({ title: "アップロードに失敗しました", status: "error" });
       setLoading(false);
@@ -213,7 +211,6 @@ export const Edit: VFC = memo(() => {
                   variant="outlined"
                   value={name}
                   onChange={onChangeName}
-                  // isReadOnly={!isAdmin}
                 />
               </FormControl>
               <FormControl>
@@ -222,7 +219,6 @@ export const Edit: VFC = memo(() => {
                   variant="outlined"
                   value={nickname}
                   onChange={onChangeNickname}
-                  // isReadOnly={!isAdmin}
                 />
               </FormControl>
               <FormControl>
@@ -231,7 +227,6 @@ export const Edit: VFC = memo(() => {
                   variant="outlined"
                   value={hobbies}
                   onChange={onChangeHobbies}
-                  // isReadOnly={!isAdmin}
                 />
               </FormControl>
               <FormControl>
@@ -240,7 +235,6 @@ export const Edit: VFC = memo(() => {
                   variant="outlined"
                   value={recentTopic}
                   onChange={onChangeRecentTopic}
-                  // isReadOnly={!isAdmin}
                 />
               </FormControl>
               <Divider my={4} />

@@ -15,7 +15,6 @@ import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 import { FormControl, TextField } from "@material-ui/core";
 import { AuthContext } from "../../../router/Router";
 
-//idバケツリレーになってしまっている？globalなstateで管理する?
 type Props = {
   id: number | undefined;
   user: User | null;

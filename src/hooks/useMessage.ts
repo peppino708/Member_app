@@ -1,7 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useCallback } from "react";
 
-//型指定の時|(パイプライン)はorの意味
 type Props = {
   title: string;
   status: "info" | "warning" | "success" | "error";

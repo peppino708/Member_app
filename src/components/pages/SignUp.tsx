@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// サインアップ用ページ
 const SignUp: React.FC = () => {
   const classes = useStyles();
   const histroy = useHistory();
@@ -62,8 +61,6 @@ const SignUp: React.FC = () => {
       console.log(res);
 
       if (res.status === 200) {
-        // アカウント作成と同時にログインさせてしまう
-        // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
@@ -149,7 +146,7 @@ const SignUp: React.FC = () => {
           </CardContent>
         </Card>
       </form>
-      <AlertMessage // エラーが発生した場合はアラートを表示
+      <AlertMessage
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"

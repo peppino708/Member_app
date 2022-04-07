@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// サインイン用ページ
 const SignIn: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -66,7 +65,6 @@ const SignIn: React.FC = () => {
       console.log(res);
 
       if (res.status === 200) {
-        // ログインに成功した場合はCookieに各値を格納
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
@@ -120,7 +118,7 @@ const SignIn: React.FC = () => {
               size="large"
               fullWidth
               color="default"
-              disabled={!email || !password ? true : false} // 空欄があった場合はボタンを押せないように
+              disabled={!email || !password ? true : false}
               className={classes.submitBtn}
               onClick={handleSubmit}
             >
@@ -137,7 +135,7 @@ const SignIn: React.FC = () => {
           </CardContent>
         </Card>
       </form>
-      <AlertMessage // エラーが発生した場合はアラートを表示
+      <AlertMessage
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"

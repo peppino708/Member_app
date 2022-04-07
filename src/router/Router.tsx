@@ -9,7 +9,6 @@ import { getCurrentUser } from "../lib/api/auth";
 import CommonLayout from "../components/layouts/CommonLayout";
 import { Center, Spinner } from "@chakra-ui/react";
 
-// グローバルで扱う変数・関数
 export const AuthContext = createContext(
   {} as {
     loading: boolean;
@@ -26,8 +25,6 @@ export const Router: VFC = memo(() => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
 
-  // 認証済みのユーザーがいるかどうかチェック
-  // 確認できた場合はそのユーザーの情報を取得
   const handleGetCurrentUser = async () => {
     try {
       const res = await getCurrentUser();
