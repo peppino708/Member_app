@@ -93,10 +93,8 @@ export const TweetCommentModal: VFC<Props> = memo((props) => {
             ) : (
               comments &&
               comments.map((comment) => (
-                <Box display="flex">
-                  <Text fontSize="xl" key={comment.id}>
-                    {comment.content}
-                  </Text>
+                <Box display="flex" key={comment.id}>
+                  <Text fontSize="xl">{comment.content}</Text>
                   {currentUser?.id === comment.userId && (
                     <Button onClick={() => onClickDeleteComment(comment.id)}>
                       <Delete />
