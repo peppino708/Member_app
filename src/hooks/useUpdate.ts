@@ -1,43 +1,44 @@
-import axios from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { User } from "../types/api/user";
+import { User } from "../interfaces/index";
+import client from "../lib/api/client";
+import { AuthContext } from "../router/Router";
 import { useMessage } from "./useMessage";
 
-export const useUpadate = () => {
+export const useUpdate = () => {
   const { showMessage } = useMessage();
   const history = useHistory();
+  const { setCurrentUser } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
 
   const update = useCallback(
     (
-      // id: string,
-      userName: string,
+      id: string | undefined,
+      name: string,
       nickname: string,
       hobbies: string,
-      recentImage: string
+      recentTopic: string
     ) => {
       setLoading(true);
 
-      axios
-        .patch<User>(`http://localhost:3000/api/v1/members`, {
-          // .patch<User>(`http://localhost:3000/api/v1/members${id}`, {
-          name: userName,
-          nick_name: nickname,
+      client
+        .patch<User>(`auth/members/${id}`, {
+          name: name,
+          nickname: nickname,
           hobbies: hobbies,
-          recent_image: recentImage,
+          recent_topic: recentTopic,
         })
         .then((res) => {
-          console.log(res.data);
+          setCurrentUser(res.data);
           showMessage({ title: "更新しました", status: "success" });
           history.push("/home/user_management");
         })
         .catch(() => showMessage({ title: "更新できません", status: "error" }))
         .finally(() => setLoading(false));
     },
-    [history, showMessage]
+    [history, showMessage, setCurrentUser]
   );
-  return { update, loading };
+  return { update, loading, setLoading };
 };

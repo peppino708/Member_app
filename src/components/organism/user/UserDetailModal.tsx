@@ -1,7 +1,4 @@
 import {
-  FormControl,
-  FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,32 +8,35 @@ import {
   ModalOverlay,
   Stack,
 } from "@chakra-ui/react";
-import { ChangeEvent, memo, useEffect, useState, VFC } from "react";
+import { ChangeEvent, memo, useContext, useEffect, useState, VFC } from "react";
 import { useHistory } from "react-router-dom";
-import { User } from "../../../types/api/user";
+import { User } from "../../../interfaces/index";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
+import { FormControl, TextField } from "@material-ui/core";
+import { AuthContext } from "../../../router/Router";
 
 type Props = {
+  id: number | undefined;
   user: User | null;
   isOpen: boolean;
-  isAdmin?: boolean;
   onClose: () => void;
 };
 
 export const UserDetailModal: VFC<Props> = memo((props) => {
-  const { user, isOpen, isAdmin = false, onClose } = props;
+  const { user, isOpen, onClose, id = undefined } = props;
   const history = useHistory();
+  const { currentUser } = useContext(AuthContext);
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [hobbies, setHobbies] = useState("");
-  const [recentImage, setRecentImage] = useState("");
+  const [recentTopic, setRecentTopic] = useState("");
 
   useEffect(() => {
-    setNickname(user?.nick_name ?? "");
+    setNickname(user?.nickname ?? "");
     setName(user?.name ?? "");
     setHobbies(user?.hobbies ?? "");
-    setRecentImage(user?.recent_image ?? "");
+    setRecentTopic(user?.recentTopic ?? "");
   }, [user]);
 
   const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
@@ -46,17 +46,13 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
   const onChangeHobbies = (e: ChangeEvent<HTMLInputElement>) =>
     setHobbies(e.target.value);
   const onChangeRecentImage = (e: ChangeEvent<HTMLInputElement>) =>
-    setRecentImage(e.target.value);
+    setRecentTopic(e.target.value);
 
-  const onClickUpdate = () => history.push("/home/edit");
+  const onClickEdit = (id: number | undefined) =>
+    history.push(`/home/${id}/edit`);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      autoFocus={false}
-      // motionPreset="slideInBottom"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent pb={2}>
         <ModalHeader>Member Profile</ModalHeader>
@@ -64,45 +60,53 @@ export const UserDetailModal: VFC<Props> = memo((props) => {
         <ModalBody mx={4}>
           <Stack spacing={4}>
             <FormControl>
-              <FormLabel>名前</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="名前"
+                variant="outlined"
                 value={name}
-                onChange={onChangeNickname}
-                isReadOnly={!isAdmin}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>ニックネーム</FormLabel>
-              <Input
-                value={nickname}
                 onChange={onChangeName}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>趣味</FormLabel>
-              <Input
+              <TextField
+                margin="normal"
+                label="ニックネーム"
+                variant="outlined"
+                value={nickname}
+                onChange={onChangeNickname}
+                inputProps={{ readOnly: true }}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                margin="normal"
+                label="趣味"
+                variant="outlined"
                 value={hobbies}
                 onChange={onChangeHobbies}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
             <FormControl>
-              <FormLabel>最近の1枚</FormLabel>
-              <Input
-                value={recentImage}
+              <TextField
+                margin="normal"
+                label="最近のできごと"
+                variant="outlined"
+                value={recentTopic}
                 onChange={onChangeRecentImage}
-                isReadOnly={!isAdmin}
+                inputProps={{ readOnly: true }}
               />
             </FormControl>
           </Stack>
         </ModalBody>
         {/* current_userと一致の場合のみ編集ボタンを出すようにする */}
-        {/* {isAdmin && ( */}
-        <ModalFooter>
-          <PrimaryButton onClick={onClickUpdate}>編集</PrimaryButton>
-        </ModalFooter>
-        {/* )} */}
+        {currentUser?.id === id && (
+          <ModalFooter>
+            <PrimaryButton onClick={() => onClickEdit(id)}>編集</PrimaryButton>
+          </ModalFooter>
+        )}
       </ModalContent>
     </Modal>
   );

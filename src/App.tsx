@@ -1,7 +1,7 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 //chakraui使う時はルートのコンポーネントでChakraProviderで囲う
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import theme from "./theme/theme";
 import { Router } from "./router/Router";

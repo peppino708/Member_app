@@ -25,6 +25,7 @@ export const UserCard: VFC<Props> = memo((props) => {
     >
       <Stack textAlign="center">
         <Image
+          objectFit={"cover"}
           borderRadius="full"
           boxSize="160px"
           src={imageUrl}

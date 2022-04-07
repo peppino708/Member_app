@@ -1,46 +1,130 @@
-# Getting Started with Create React App
+# Name
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Member App (バイトメンバーのプロフィールアプリ)<br>
 
-## Available Scripts
+# Features
 
-In the project directory, you can run:
+▼ Demo はこちらです
 
-### `npm start`
+https://tinder-clone3084.herokuapp.com/#/login
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Email: Tinder_clone@email.com
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Password： Tinder_clone
 
-### `npm test`
+▼ オリジナルの Tinder はこちらです
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://tinder.com/
 
-### `npm run build`
+### 現在の機能
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 人物カードを仕分けする機能（ボタンとスワイプの両方でできます）
+- お互いに「いいね」を押した時マッチする機能
+- プロフィールの更新機能（名前、メールアドレス、パスワード、職業、自己紹介、性別、性的趣向、画像）
+- ログイン機能
+- ログアウト機能
+- ユーザー登録機能
+- メッセージ送信機能
+- 相手のメーセージに「いいね」する機能
+- 誰が自分に「いいね」したかを表示する機能　<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Requirement
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 環境
 
-### `npm run eject`
+- macOS Big Sur 11.0
+- python(3.6.5)
+- pip(21.0.1)
+- Node(14.15.1)
+- npm(6.14.8)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### バックエンド
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Django (3.1.7)
+- django-cors-headers (3.7.0)
+- djangorestframework (3.12.4)
+- djangorestframework-simplejwt (4.4.0)
+- Pillow (8.1.2)
+- PyJWT (1.7.1)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### フロントエンド
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- react (17.0.2)
+- react-scripts (4.0.2)
+- react-dom (17.0.2)
+- react-router-dom (5.2.0)
+- react-router-hash-link (2.4.0)
+- react-draggable (4.4.3)
+- redux (4.0.5)
+- react-redux (7.2.3)
+- redux-devtools-extension (2.13.9)
+- redux-thunk (2.3.0)
+- @material-ui/core (4.11.3)
+- @material-ui/icons (4.11.2)
+- @material-ui/lab (4.0.0-alpha.57)
+- axios (0.21.1)
 
-## Learn More
+# Usage(Local 環境)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Tinder_clone をダウンロードする
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```shell
+$ git clone https://github.com/sijysn/Tinder_clone.git
+$ cd Tinder_clone
+```
+
+2. 仮想環境を構築する
+
+```shell
+Tinder_clone $ pip install virtualenv
+Tinder_clone $ virtualenv myenv
+Tinder_clone $ source myenv/bin/activate #mac
+```
+
+注）　 Windows の場合はこちらを参照
+
+https://qiita.com/daikidomon/items/03c82a61e3b3bef0e050
+
+3. 必要なライブラリをインストールし、サーバを立てる
+
+###### バックエンド
+
+```shell
+Tinder_clone $ cd backend
+backend $ pip install -r requirements.txt
+backend $ python manage.py migrate
+backend $ python manage.py runserver
+```
+
+###### フロントエンド
+
+```shell
+Tinder_clone $ cd frontend
+frontend $ npm install
+frontend $ npm start
+```
+
+4. URL にアクセスする
+
+   http://localhost:3000/#/register
+
+注）　デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
+
+1. ユーザーを登録する  
+   http://localhost:3000/#/register
+2. ログアウトする  
+   http://localhost:3000/#/settings
+3. 別のユーザーを登録する  
+   http://localhost:3000/#/register 　<br>
+
+# Note
+
+今後やるべきこと
+
+- スタイルの統一（style props, CSS, Material-UI の makeStyles など）
+- テストを書く　<br>
+
+# Author
+
+- Seiji Yoshino
+- sij.ysn25@gmail.com
