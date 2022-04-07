@@ -35,15 +35,15 @@
 .DS_Store
 
 # dependencies
-/node_modules
-/.pnp
+node_modules
+/frontend/.pnp
 .pnp.js
 
 # testing
-/coverage
+/frontend/coverage
 
 # production
-/build
+/frontend/build
 
 # misc
 .DS_Store
