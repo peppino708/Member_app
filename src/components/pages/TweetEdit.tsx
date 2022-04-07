@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Button, TextField } from "@material-ui/core";
 import { Delete, Send } from "@material-ui/icons";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useMessage } from "../../hooks/useMessage";
 import { useUpdatePost } from "../../hooks/useUpdatePost";
@@ -14,31 +14,34 @@ interface EditPost {
 
 export const TweetEdit = () => {
   const [tweetContent, setTweetContent] = useState("");
-  // const [loadingPost, setLoadingPost] = useState(false);
 
   const { id } = useParams<EditPost>();
   const history = useHistory();
   const { showMessage } = useMessage();
   const { updatePost } = useUpdatePost();
 
-  const handleGetEditPost = useCallback(async () => {
-    // setLoadingPost(true);
-    try {
-      const res = await client.get<Post>(`auth/posts/${id}`);
-
-      const post = res.data;
-
-      setTweetContent(post.content ?? "");
-    } catch (e) {
-      console.log(e);
-    } finally {
-      // setLoadingPost(false);
-    }
-  }, [id]);
-
   useEffect(() => {
+    let unmounted = false;
+    const handleGetEditPost = async () => {
+      try {
+        const res = await client.get<Post>(`auth/posts/${id}`);
+
+        const post = res.data;
+
+        if (!unmounted) {
+          setTweetContent(post.content ?? "");
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+      }
+    };
     handleGetEditPost();
-  }, [handleGetEditPost]);
+    const cleanup = () => {
+      unmounted = true;
+    };
+    return cleanup;
+  }, [id]);
 
   const onClickUpdate = () => {
     updatePost(id, tweetContent);
