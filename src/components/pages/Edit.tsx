@@ -82,7 +82,6 @@ export const Edit: VFC = memo(() => {
     }
   }, [id]);
 
-  //cleanUp関数でunmount時のメモリーリークを防止する→合ってる？
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
