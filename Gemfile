@@ -45,6 +45,8 @@ gem 'devise_token_auth'
 
 gem 'carrierwave'
 
+gem 'foreman'
+
 group :production do
   gem 'pg', '~> 1.2.3'
 end

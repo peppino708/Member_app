@@ -89,6 +89,7 @@ GEM
       rails (>= 4.2.0, < 6.2)
     erubi (1.10.0)
     ffi (1.15.5)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -190,6 +191,7 @@ DEPENDENCIES
   carrierwave
   devise
   devise_token_auth
+  foreman
   listen (~> 3.3)
   pg (~> 1.2.3)
   puma (~> 5.0)
