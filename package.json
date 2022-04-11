@@ -1,0 +1,15 @@
+{
+  "name": "memberapp",
+  "version": "1.0.0",
+  "description": "MemberApp",
+  "main": "index.js",
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.1.0"
+  },
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build && cd ..",
+    "deploy": "cp -a frontend/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client built!'"
+  }
+}

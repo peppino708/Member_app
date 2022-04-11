@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:3001" # React側はポート番号3001で作るので「localhost:3001」を指定
+    origins "localhost:3001", "https://murmuring-earth-47067.herokuapp.com/api"
 
     resource "*",
       headers: :any,
