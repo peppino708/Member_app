@@ -47,6 +47,10 @@ gem 'carrierwave'
 
 gem 'foreman'
 
+gem 'fog-aws'
+
+gem 'dotenv-rails'
+
 group :production do
   gem 'pg', '~> 1.2.3'
 end
