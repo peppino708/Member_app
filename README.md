@@ -6,35 +6,28 @@ Member App (バイトメンバーのプロフィールアプリ)<br>
 
 ▼ Demo はこちらです
 
-https://tinder-clone3084.herokuapp.com/#/login
+https://murmuring-earth-47067.herokuapp.com/
 
-Email: Tinder_clone@email.com
+Email: Demo@email.com
 
-Password： Tinder_clone
-
-▼ オリジナルの Tinder はこちらです
-
-https://tinder.com/
+Password： Demo0000
 
 ### 現在の機能
 
-- 人物カードを仕分けする機能（ボタンとスワイプの両方でできます）
-- お互いに「いいね」を押した時マッチする機能
+- プロフィール閲覧機能（登録している Member のニックネーム・趣味・最近のできごと etc...）
+- Tweet 機能＆Tweet に対する Comment 機能
 - プロフィールの更新機能（名前、メールアドレス、パスワード、職業、自己紹介、性別、性的趣向、画像）
 - ログイン機能
 - ログアウト機能
 - ユーザー登録機能
-- メッセージ送信機能
-- 相手のメーセージに「いいね」する機能
-- 誰が自分に「いいね」したかを表示する機能　<br>
 
 # Requirement
 
 ### 環境
 
 - macOS Big Sur 11.0
-- python(3.6.5)
-- pip(21.0.1)
+- rails(3.6.5)
+- ruby(21.0.1)
 - Node(14.15.1)
 - npm(6.14.8)
 
@@ -66,7 +59,7 @@ https://tinder.com/
 
 # Usage(Local 環境)
 
-1. Tinder_clone をダウンロードする
+1. MemberApp をダウンロードする
 
 ```shell
 $ git clone https://github.com/sijysn/Tinder_clone.git
@@ -126,5 +119,5 @@ frontend $ npm start
 
 # Author
 
-- Seiji Yoshino
-- sij.ysn25@gmail.com
+- Naoya Shishikura
+- 708.baseball.ster@gmail.com
