@@ -15,8 +15,9 @@ Password： Demo0000
 ### 現在の機能
 
 - プロフィール閲覧機能（登録している Member のニックネーム・趣味・最近のできごと etc...）
-- Tweet 機能＆Tweet に対する Comment 機能
-- プロフィールの更新機能（名前、メールアドレス、パスワード、職業、自己紹介、性別、性的趣向、画像）
+- Tweet 機能
+- Tweet に対する Comment 機能
+- プロフィールの更新機能（名前、ニックネーム、趣味、最近のできごと、画像）
 - ログイン機能
 - ログアウト機能
 - ユーザー登録機能
@@ -62,8 +63,8 @@ Password： Demo0000
 1. MemberApp をダウンロードする
 
 ```shell
-$ git clone https://github.com/sijysn/Tinder_clone.git
-$ cd Tinder_clone
+$ git clone https://github.com/peppino708/Member_app.git
+$ cd MemberApp
 ```
 
 2. 仮想環境を構築する
