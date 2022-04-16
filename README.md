@@ -26,37 +26,54 @@ Password： Demo0000
 
 ### 環境
 
-- macOS Big Sur 11.0
-- rails(3.6.5)
-- ruby(21.0.1)
-- Node(14.15.1)
-- npm(6.14.8)
+- macOS Monterey 12.2.1
+- rails(6.1.5)
+- ruby(2.6.9)
+- Node(16.13.0)
+- npm(8.1.0)
 
 ### バックエンド
 
-- Django (3.1.7)
-- django-cors-headers (3.7.0)
-- djangorestframework (3.12.4)
-- djangorestframework-simplejwt (4.4.0)
-- Pillow (8.1.2)
-- PyJWT (1.7.1)
+- rails(6.1.5)
+- carrierwave
+- devise
+- devise_token_auth
+- foreman
+- pg (~> 1.2.3)
+- puma (~> 5.0)
+- rack-cors
+- sqlite3 (~> 1.4)
 
 ### フロントエンド
 
 - react (17.0.2)
-- react-scripts (4.0.2)
+- react-scripts (5.0.0)
 - react-dom (17.0.2)
 - react-router-dom (5.2.0)
-- react-router-hash-link (2.4.0)
-- react-draggable (4.4.3)
-- redux (4.0.5)
-- react-redux (7.2.3)
-- redux-devtools-extension (2.13.9)
-- redux-thunk (2.3.0)
-- @material-ui/core (4.11.3)
+- typescript (4.5.4)
+- @chakra-ui/icons (1.1.1)
+- @chakra-ui/react (1.7.3)
+- @emotion/react (11.7.1)
+- @emotion/styled (11.6.0)
+- @material-ui/core (4.12.3)
 - @material-ui/icons (4.11.2)
-- @material-ui/lab (4.0.0-alpha.57)
-- axios (0.21.1)
+- @material-ui/lab (4.0.0-alpha.60)
+- @testing-library/jest-dom (5.16.1)
+- @testing-library/react (12.1.2)
+- @testing-library/user-event (13.5.0)
+- @types/jest (27.0.3)
+- @types/js-cookie (3.0.1)
+- @types/node (16.11.14)
+- @types/react (17.0.37)
+- @types/react-dom (17.0.11)
+- @types/react-icons (3.0.0)
+- @types/react-router-dom (5.3.3)
+- axios (0.24.0)
+- axios-case-converter (0.9.0)
+- framer-motion (4.1.17)
+- js-cookie (3.0.1)
+- web-vitals (2.1.2)
+- @types/axios (0.14.0)
 
 # Usage(Local 環境)
 
@@ -67,55 +84,49 @@ $ git clone https://github.com/peppino708/Member_app.git
 $ cd MemberApp
 ```
 
-2. 仮想環境を構築する
-
-```shell
-Tinder_clone $ pip install virtualenv
-Tinder_clone $ virtualenv myenv
-Tinder_clone $ source myenv/bin/activate #mac
-```
-
-注）　 Windows の場合はこちらを参照
-
-https://qiita.com/daikidomon/items/03c82a61e3b3bef0e050
-
-3. 必要なライブラリをインストールし、サーバを立てる
+2. 必要なライブラリをインストールし、サーバを立てる
 
 ###### バックエンド
 
 ```shell
-Tinder_clone $ cd backend
-backend $ pip install -r requirements.txt
-backend $ python manage.py migrate
-backend $ python manage.py runserver
+MemberApp $ bundle install
+MemberApp $ rails db:create
+MemberApp $ rails db:migrate
+MemberApp $ rails s
 ```
 
 ###### フロントエンド
 
 ```shell
-Tinder_clone $ cd frontend
+MemberApp $ cd frontend
 frontend $ npm install
 frontend $ npm start
 ```
 
-4. URL にアクセスする
+###### バックエンド&フロントエンドのサーバーを同時に立てる
 
-   http://localhost:3000/#/register
+```shell
+MemberApp $ foreman start -f Procfile.dev
+```
 
-注）　デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
+3. URL にアクセスする
+
+   http://localhost:3001
+
+注）デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
 
 1. ユーザーを登録する  
-   http://localhost:3000/#/register
-2. ログアウトする  
-   http://localhost:3000/#/settings
+   http://localhost:3000/signup
+2. ログインする  
+   http://localhost:3000/signin
 3. 別のユーザーを登録する  
-   http://localhost:3000/#/register 　<br>
+   http://localhost:3000/signup 　<br>
 
 # Note
 
 今後やるべきこと
 
-- スタイルの統一（style props, CSS, Material-UI の makeStyles など）
+- スタイルの統一（style props) CSS) Material-UI の makeStyles など）
 - テストを書く　<br>
 
 # Author
