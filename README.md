@@ -39,10 +39,10 @@ Password： Demo0000
 - devise
 - devise_token_auth
 - foreman
-- pg (~> 1.2.3)
-- puma (~> 5.0)
+- pg (1.2.3)
+- puma (5.0)
 - rack-cors
-- sqlite3 (~> 1.4)
+- sqlite3 (1.4)
 
 ### フロントエンド
 
@@ -116,11 +116,11 @@ MemberApp $ foreman start -f Procfile.dev
 注）デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
 
 1. ユーザーを登録する  
-   http://localhost:3000/signup
+   http://localhost:3001/signup
 2. ログインする  
-   http://localhost:3000/signin
+   http://localhost:3001/signin
 3. 別のユーザーを登録する  
-   http://localhost:3000/signup 　<br>
+   http://localhost:3001/signup 　<br>
 
 # Note
 
