@@ -6,125 +6,130 @@ Member App (バイトメンバーのプロフィールアプリ)<br>
 
 ▼ Demo はこちらです
 
-https://tinder-clone3084.herokuapp.com/#/login
+https://murmuring-earth-47067.herokuapp.com/
 
-Email: Tinder_clone@email.com
+Email: Demo@email.com
 
-Password： Tinder_clone
-
-▼ オリジナルの Tinder はこちらです
-
-https://tinder.com/
+Password： Demo0000
 
 ### 現在の機能
 
-- 人物カードを仕分けする機能（ボタンとスワイプの両方でできます）
-- お互いに「いいね」を押した時マッチする機能
-- プロフィールの更新機能（名前、メールアドレス、パスワード、職業、自己紹介、性別、性的趣向、画像）
+- プロフィール閲覧機能（登録している Member のニックネーム・趣味・最近のできごと etc...）
+- Tweet 機能
+- Tweet に対する Comment 機能
+- プロフィールの更新機能（名前、ニックネーム、趣味、最近のできごと、画像）
 - ログイン機能
 - ログアウト機能
 - ユーザー登録機能
-- メッセージ送信機能
-- 相手のメーセージに「いいね」する機能
-- 誰が自分に「いいね」したかを表示する機能　<br>
 
 # Requirement
 
 ### 環境
 
-- macOS Big Sur 11.0
-- python(3.6.5)
-- pip(21.0.1)
-- Node(14.15.1)
-- npm(6.14.8)
+- macOS Monterey 12.2.1
+- rails(6.1.5)
+- ruby(2.6.9)
+- Node(16.13.0)
+- npm(8.1.0)
 
 ### バックエンド
 
-- Django (3.1.7)
-- django-cors-headers (3.7.0)
-- djangorestframework (3.12.4)
-- djangorestframework-simplejwt (4.4.0)
-- Pillow (8.1.2)
-- PyJWT (1.7.1)
+- rails(6.1.5)
+- carrierwave
+- devise
+- devise_token_auth
+- foreman
+- pg (1.2.3)
+- puma (5.0)
+- rack-cors
+- sqlite3 (1.4)
 
 ### フロントエンド
 
 - react (17.0.2)
-- react-scripts (4.0.2)
+- react-scripts (5.0.0)
 - react-dom (17.0.2)
 - react-router-dom (5.2.0)
-- react-router-hash-link (2.4.0)
-- react-draggable (4.4.3)
-- redux (4.0.5)
-- react-redux (7.2.3)
-- redux-devtools-extension (2.13.9)
-- redux-thunk (2.3.0)
-- @material-ui/core (4.11.3)
+- typescript (4.5.4)
+- @chakra-ui/icons (1.1.1)
+- @chakra-ui/react (1.7.3)
+- @emotion/react (11.7.1)
+- @emotion/styled (11.6.0)
+- @material-ui/core (4.12.3)
 - @material-ui/icons (4.11.2)
-- @material-ui/lab (4.0.0-alpha.57)
-- axios (0.21.1)
+- @material-ui/lab (4.0.0-alpha.60)
+- @testing-library/jest-dom (5.16.1)
+- @testing-library/react (12.1.2)
+- @testing-library/user-event (13.5.0)
+- @types/jest (27.0.3)
+- @types/js-cookie (3.0.1)
+- @types/node (16.11.14)
+- @types/react (17.0.37)
+- @types/react-dom (17.0.11)
+- @types/react-icons (3.0.0)
+- @types/react-router-dom (5.3.3)
+- axios (0.24.0)
+- axios-case-converter (0.9.0)
+- framer-motion (4.1.17)
+- js-cookie (3.0.1)
+- web-vitals (2.1.2)
+- @types/axios (0.14.0)
 
 # Usage(Local 環境)
 
-1. Tinder_clone をダウンロードする
+1. MemberApp をダウンロードする
 
 ```shell
-$ git clone https://github.com/sijysn/Tinder_clone.git
-$ cd Tinder_clone
+$ git clone https://github.com/peppino708/Member_app.git
+$ cd MemberApp
 ```
 
-2. 仮想環境を構築する
-
-```shell
-Tinder_clone $ pip install virtualenv
-Tinder_clone $ virtualenv myenv
-Tinder_clone $ source myenv/bin/activate #mac
-```
-
-注）　 Windows の場合はこちらを参照
-
-https://qiita.com/daikidomon/items/03c82a61e3b3bef0e050
-
-3. 必要なライブラリをインストールし、サーバを立てる
+2. 必要なライブラリをインストールし、サーバを立てる
 
 ###### バックエンド
 
 ```shell
-Tinder_clone $ cd backend
-backend $ pip install -r requirements.txt
-backend $ python manage.py migrate
-backend $ python manage.py runserver
+MemberApp $ bundle install
+MemberApp $ rails db:create
+MemberApp $ rails db:migrate
+MemberApp $ rails s
 ```
 
 ###### フロントエンド
 
 ```shell
-Tinder_clone $ cd frontend
+MemberApp $ cd frontend
 frontend $ npm install
 frontend $ npm start
 ```
 
-4. URL にアクセスする
+###### バックエンド&フロントエンドのサーバーを同時に立てる
 
-   http://localhost:3000/#/register
+```shell
+MemberApp $ foreman start -f Procfile.dev
+```
 
-注）　デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
+3. URL にアクセスする
+
+   http://localhost:3001
+
+注）デフォルトでユーザーが登録されていないので、挙動の確認には、ご自身で何人かのユーザーをご登録していただく必要がございます。
 
 1. ユーザーを登録する  
-   http://localhost:3000/#/register
-2. ログアウトする  
-   http://localhost:3000/#/settings
+   http://localhost:3001/signup
+2. ログインする  
+   http://localhost:3001/signin
 3. 別のユーザーを登録する  
-   http://localhost:3000/#/register 　<br>
+   http://localhost:3001/signup 　<br>
 
 # Note
 
 今後やるべきこと
 
-- スタイルの統一（style props, CSS, Material-UI の makeStyles など）
+- スタイルの統一（style props) CSS) Material-UI の makeStyles など）
 - テストを書く　<br>
 
 # Author
 
-- Seiji Yoshino
-- sij.ysn25@gmail.com
+- Naoya Shishikura
+- 708.baseball.ster@gmail.com
