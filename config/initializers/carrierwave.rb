@@ -3,7 +3,7 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
-    #本番環境のURLに変える？
+    #本番環境ではS3のオブジェクトURLに設定する
     config.asset_host = "https://member-app-image.s3.ap-northeast-1.amazonaws.com"
     config.storage :fog
     config.fog_provider = 'fog/aws'
