@@ -4,7 +4,7 @@ require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
     #本番環境のURLに変える？
-    config.asset_host = "https://murmuring-earth-47067.herokuapp.com"
+    config.asset_host = "https://member-app-image.s3.ap-northeast-1.amazonaws.com"
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'member-app-image' # 作成したバケット名を記述
