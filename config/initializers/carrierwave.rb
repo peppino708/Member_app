@@ -3,7 +3,8 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
-    config.asset_host = "http://localhost:3000"
+    #本番環境のURLに変える？
+    config.asset_host = "https://murmuring-earth-47067.herokuapp.com/"
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'member-app-image' # 作成したバケット名を記述
