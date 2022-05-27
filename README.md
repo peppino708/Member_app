@@ -126,8 +126,10 @@ MemberApp $ foreman start -f Procfile.dev
 
 今後やるべきこと
 
-- スタイルの統一（style props) CSS) Material-UI の makeStyles など）
-- テストを書く　<br>
+- スタイルの統一
+- テストを書く<br>
+- ReactRouter バリデーション
+- パフォーマンスの最適化
 
 # Author
 
