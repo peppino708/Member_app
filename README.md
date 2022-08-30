@@ -128,6 +128,7 @@ MemberApp $ foreman start -f Procfile.dev
 
 - スタイルの統一（style props) CSS) Material-UI の makeStyles など）
 - テストを書く　<br>
+- N + 1問題<br>
 
 # Author
 
