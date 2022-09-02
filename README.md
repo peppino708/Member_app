@@ -1,6 +1,6 @@
 # Name
 
-Member App (バイトメンバーのプロフィールアプリ)<br>
+Member App (社内専用のSNSです)<br>
 
 # Features
 
